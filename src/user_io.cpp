@@ -26,7 +26,7 @@ int askQuestions3(std::istream& is, std::ostream& os){
     int get_int = getInteger(is, os, "What is your favorite integer? ");
     double get_dub = getDouble(is, os, "What is your favorite number? ");
     for(int i = 1; i <= get_int; i++){
-        std::cout << i << " " << color << " " << get_dub<< std::endl;
+        os << i << " " << color << " " << get_dub<< std::endl;
     }
     return get_int;
 }
