@@ -9,7 +9,7 @@ questions_3: questions_3.o
 hello.o: hello.cpp
 	g++ -std=c++11 -c hello.cpp
 
-questions_3.o: questions_3.cpp
+questions_3.o: questions_3.cpp image_menu.h
 	g++ -std=c++11 -c questions_3.cpp
 
 user_io.o: user_io.cpp image_menu.h
