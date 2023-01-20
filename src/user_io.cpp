@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "image_menu.h"
 
 std::string getString( std::istream& is, std::ostream& os, const std::string& prompt ){
@@ -23,7 +24,7 @@ int askQuestions3(std::istream& is, std::ostream& os){
     std::string color = getString(is, os, "What is your favorite color? ");
     int get_int = getInteger(is, os, "What is your favorite integer? ");
     double get_dub = getDouble(is, os, "What is your favorite number? ");
-    for(int i = 1; i == get_int; i++){
+    for(int i = 1; i <= get_int; i++){
         std::cout << i << " " << color << " " << get_dub<< std::endl;
     }
     return get_dub;

@@ -1,4 +1,4 @@
-
+#include <string>
 #include <iostream>
 
 std::string getString( std::istream& is, std::ostream& os, const std::string& prompt );
