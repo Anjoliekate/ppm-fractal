@@ -27,5 +27,5 @@ int askQuestions3(std::istream& is, std::ostream& os){
     for(int i = 1; i <= get_int; i++){
         std::cout << i << " " << color << " " << get_dub<< std::endl;
     }
-    return get_dub;
+    return get_int;
 }
