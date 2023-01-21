@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
-#ifndef image_menu.h
-#define image_menu.h
+#ifndef image_menu
+#define image_menu
 
 std::string getString( std::istream& is, std::ostream& os, const std::string& prompt);
 int getInteger( std::istream& is, std::ostream& os, const std::string& prompt);
