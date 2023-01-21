@@ -1,4 +1,3 @@
-#include "controllers.cpp"
 #include <iostream>
 #include "image_menu.h"
 

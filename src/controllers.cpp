@@ -1,4 +1,3 @@
-#include "user_io.cpp"
 #include "image_menu.h"
 #include <iostream>
 
