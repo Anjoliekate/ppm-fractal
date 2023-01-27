@@ -6,7 +6,7 @@
 class Image{
     public:
     Image();
-    Image(const int& height, const int& width);
+    Image(const int& height_input, const int& width_input);
     int getHeight() const;
     int getWidth() const;
     bool indexValid( const int& row, const int& column, const int& channel ) const;
@@ -15,11 +15,11 @@ class Image{
     void setHeight( const int& height );
     void setWidth( const int& width );
     void setChannel(const int& row, const int& column, const int& channel, const int& value );
+    std::vector<int> imageVector;
 
     private:
         int height;
         int width;
-        std::vector<int> imageVector;
 };
 
 #endif /*_IMAGE_H_*/

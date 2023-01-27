@@ -3,10 +3,10 @@
 #include "image_menu.h"
 
 void diagonalQuadPattern( std::istream& is, std::ostream& os, Image& image ){
-    int height = getInteger(is, os, "Image height? ");
-    int width = getInteger(is, os, "Image width? ");
+    int height = getInteger(std::cin, std::cout, "Image height? ");
+    int width = getInteger(std::cin, std::cout, "Image width? ");
     image.setHeight(height);
-    image.setWidth(height);
+    image.setWidth(width);
     for(int row = 0; row < height; row++){
         for(int column = 0; column < width; column++){
             if(row < height / 2){
