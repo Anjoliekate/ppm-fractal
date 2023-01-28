@@ -16,8 +16,9 @@ void diagonalQuadPattern( std::istream& is, std::ostream& os, Image& image );
 int assignment2( std::istream& is, std::ostream& os);
 
 //image file
+/*
 void writeUserImage( std::istream& is, std::ostream& os, const PPM& p );
 void stripedDiagonalPattern( std::istream& is, std::ostream& os, PPM& p );
 int assignment3( std::istream& is, std::ostream& os );
-
+*/
 #endif /*_IMAGE_MENU_H_*/
