@@ -8,10 +8,13 @@ hello.o: hello.cpp
 
 
 
-questions_3: questions_3.o user_io.o controllers.o
-	g++  -o questions_3 questions_3.o user_io.o controllers.o 
+questions_3: questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o
+	g++  -o questions_3 questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o
 
-controllers.o: controllers.cpp image_menu.h
+questions_3.o: questions_3.cpp image_menu.h
+	g++ -c questions_3.cpp
+
+controllers.o: controllers.cpp image_menu.h Image.h
 	g++  -c controllers.cpp
 
 
