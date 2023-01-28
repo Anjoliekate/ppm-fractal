@@ -7,7 +7,6 @@ void drawAsciiImage( std::istream& is, std::ostream& os, const Image& image ){
     int width = image.getWidth();
     for(int row = 0; row < height; row++){
         for(int column = 0; column < width; column++){
-
             int r = image.getChannel(row, column, 0);
             int g = image.getChannel(row, column, 1);
             int b = image.getChannel(row, column, 2);
