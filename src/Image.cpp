@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "Image.h"
-
+#include "image_menu.h"
 
     Image::Image(){
         int height = 0; 
@@ -24,7 +24,7 @@
         }
     
     bool Image::indexValid( const int& row, const int& column, const int& channel ) const{
-    if (row > getHeight() || column > getWidth() || channel > 2 ){
+    if (row >= getHeight() || row < 0 || column >= getWidth() || column < 0 || channel > 2 || channel < 0 ){
         return false;
     }
     return true;
@@ -32,7 +32,7 @@
 
     int Image::index( const int& row, const int& column, const int& channel ) const 
     {
-        return (row* width * 3)+ (column *3) + channel;
+        return (row* width * 3) + (column *3) + channel;
     } 
     int Image::getChannel(const int& row, const int& column, const int& channel){
         if (indexValid(row, column, channel)){

@@ -11,7 +11,7 @@ int askQuestions3(std::istream& is, std::ostream& os);
 int assignment1( std::istream& is, std::ostream& os);
 
 //ascii image
-void drawAsciiImage( std::istream& is, std::ostream& os, const Image& image );
+void drawAsciiImage( std::istream& is, std::ostream& os, Image& image );
 void diagonalQuadPattern( std::istream& is, std::ostream& os, Image& image );
 int assignment2( std::istream& is, std::ostream& os);
 

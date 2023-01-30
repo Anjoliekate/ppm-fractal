@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Image.h"
-#inlcude "image_menu.h"
+#include "image_menu.h"
 
-void drawAsciiImage( std::istream& is, std::ostream& os, const Image& image ){
+void drawAsciiImage( std::istream& is, std::ostream& os, Image& image ){
     int height = image.getHeight();
     int width = image.getWidth();
     for(int row = 0; row < height; row++){
@@ -46,4 +46,9 @@ void drawAsciiImage( std::istream& is, std::ostream& os, const Image& image ){
             }
         }
     }
+    (void) is;
+    (void) os;
 }
+/*
+    void writeUserImage(std::istream& is, std::ostream& os, const PPM& p);
+    */

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "image_menu.h"
+#include "Image.h"
 
 
 

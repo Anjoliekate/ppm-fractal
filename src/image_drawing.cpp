@@ -23,8 +23,14 @@ void diagonalQuadPattern( std::istream& is, std::ostream& os, Image& image ){
                 image.setChannel(row, column, 2, 255);
             }
             image.setChannel(row, column, 1, (2* row +2 * column)%256);
-
         }
     }
-    
+    (void) is;
+    (void) os;
 }
+/*
+    void stripedDiagonalPattern(std::istream& is, std::ostream& os, PPM& p){
+        getInteger();
+        
+    };
+*/
