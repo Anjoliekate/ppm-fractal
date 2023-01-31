@@ -1,18 +1,16 @@
 #include <iostream>
-#include <vector>
-#include "Image.h"
 #include "image_menu.h"
 
     Image::Image(){
         int height = 0; 
         int width = 0;
-        std::vector<int> imageVector(height * width*3);
+        std::vector<int> imageVector(0 * 0 * 3);
     }
 
     Image::Image(const int& height_input, const int& width_input) {
         int height = height_input;
         int width = width_input;
-        std::vector<int> imageVector(height * width*3);
+        std::vector<int> imageVector(height * width * 3);
     }
     
     int Image::getHeight() const {
@@ -34,7 +32,8 @@
     {
         return (row* width * 3) + (column *3) + channel;
     } 
-    int Image::getChannel(const int& row, const int& column, const int& channel){
+    int Image::getChannel(const int& row, const int& column, const int& channel) const
+    {
         if (indexValid(row, column, channel)){
             return imageVector[index(row, column, channel)];
         }

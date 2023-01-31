@@ -2,7 +2,7 @@
 #include "Image.h"
 #include "image_menu.h"
 
-void drawAsciiImage( std::istream& is, std::ostream& os, Image& image ){
+void drawAsciiImage( std::istream& is, std::ostream& os, const Image& image ){
     int height = image.getHeight();
     int width = image.getWidth();
     for(int row = 0; row < height; row++){
@@ -12,28 +12,28 @@ void drawAsciiImage( std::istream& is, std::ostream& os, Image& image ){
             int b = image.getChannel(row, column, 2);
             double color = (r + g + b)/765.0;
             if (color >= 1.0){
-                std::cout << "@";
+                os << "@";
             }
             else if (color >= 0.9){
-                std::cout << "#";
+                os << "#";
             }
             else if(color >= 0.8){
-                std::cout << "%";
+                os << "%";
             }
             else if(color >= 0.7){
-                std::cout << "*";
+                os << "*";
             }
             else if (color >= 0.6){
-                std::cout <<"|";
+                os <<"|";
             }
             else if(color >= 0.5){
-                std::cout << "+";
+                os << "+";
             }
             else if(color >= 0.4){
-                std::cout << ";";
+                os << ";";
             }
             else if(color >= 0.3){
-                std::cout << "~";
+                os << "~";
             }
             else if(color >= 0.2){
                 os << "-";
@@ -45,9 +45,9 @@ void drawAsciiImage( std::istream& is, std::ostream& os, Image& image ){
                 os << " ";
             }
         }
+        os << std::endl;
     }
     (void) is;
-    (void) os;
 }
 /*
     void writeUserImage(std::istream& is, std::ostream& os, const PPM& p);
