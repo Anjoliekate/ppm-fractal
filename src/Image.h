@@ -2,7 +2,7 @@
 #define _IMAGE_H_
 #include <vector>
 class Image{
-    public:
+public:
     Image();
     Image(const int& height_input, const int& width_input);
     int getHeight() const;
@@ -15,7 +15,7 @@ class Image{
     void setChannel(const int& row, const int& column, const int& channel, const int& value );
     std::vector<int> imageVector;
 
-    private:
+private:
         int height;
         int width;
 };
