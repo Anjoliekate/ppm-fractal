@@ -1,5 +1,3 @@
-
-
 all: hello questions_3 ascii_image
 
 
@@ -24,19 +22,19 @@ controllers.o: controllers.cpp image_menu.h Image.h
 
 
 
-ascii_image: ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o 
-	g++ -o ascii_image ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o
+ascii_image: ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o 
+	g++ -o ascii_image ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o 
 
-ascii_image.o: ascii_image.cpp image_menu.h Image.h PPM.h
+ascii_image.o: ascii_image.cpp image_menu.h Image.h 
 	g++ -c ascii_image.cpp
 
-image_drawing.o: image_drawing.cpp image_menu.h Image.h PPM.h
+image_drawing.o: image_drawing.cpp image_menu.h Image.h
 	g++ -c image_drawing.cpp
 
-image_output.o: image_output.cpp image_menu.h Image.h PPM.h
+image_output.o: image_output.cpp image_menu.h Image.h 
 	g++ -c image_output.cpp
 
-Image.o: Image.cpp image_menu.h Image.h PPM.h
+Image.o: Image.cpp image_menu.h Image.h 
 	g++ -c Image.cpp
 
 clean:
