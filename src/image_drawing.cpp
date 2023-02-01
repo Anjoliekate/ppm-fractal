@@ -32,7 +32,9 @@ void diagonalQuadPattern( std::istream& is, std::ostream& os, Image& image ){
 }
 /*
     void stripedDiagonalPattern(std::istream& is, std::ostream& os, PPM& p){
-        getInteger();
+        int height = getInteger(is, os, "Image height? ");
+        int width = getInteger(is, os, "Image Width? ");
+        
         
     };
 */
