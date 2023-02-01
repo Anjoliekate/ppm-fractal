@@ -2,8 +2,6 @@
 #include "image_menu.h"
 
     Image::Image(){
-        int height = 0; 
-        int width = 0;
         std::vector<int> imageVector(0 * 0 * 3);
     }
 
