@@ -1,15 +1,12 @@
 #include <iostream>
 #include "image_menu.h"
 
-    Image::Image(){
-        std::vector<int> imageVector(0 * 0 * 3);
-    }
+    Image::Image()
+        : height(0), width(0), imageVector(0 * 0 * 3){}
 
-    Image::Image(const int& height_input, const int& width_input) {
-        int height = height_input;
-        int width = width_input;
-        std::vector<int> imageVector(height * width * 3);
-    }
+    Image::Image(const int& height_input, const int& width_input)
+        : height(height_input), width(width_input), imageVector(height_input * width_input * 3){}
+    
     
     int Image::getHeight() const {
         return height;
