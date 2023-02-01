@@ -3,10 +3,13 @@
 #include "Image.h"
 
     Image::Image()
-        : height(0), width(0){}
-
+        : height(0), width(0){
+            imageVector.resize(height * width * 3);
+        }
     Image::Image(const int& height_input, const int& width_input)
-        : height(height_input), width(width_input){}
+        : height(height_input), width(width_input){
+            imageVector.resize(height * width * 3);
+        }
     
     
     int Image::getHeight() const {
