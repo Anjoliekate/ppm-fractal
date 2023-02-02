@@ -19,7 +19,7 @@ bool PPM::valueValid( const int& value ) const{
 
 void PPM::setMaxColorValue( const int& max_color_value ){
     if (max_color_value <= 255 && max_color_value >= 1 ){
-            maxColorVal = max_color_value;
+        maxColorVal = max_color_value;
     }
 } //Change the maximum color value of the PPM. Only values 1 to 255, inclusive should be accepted. If the value is not accepted, make no changes.
 

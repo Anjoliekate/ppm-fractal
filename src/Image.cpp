@@ -18,15 +18,15 @@
         }
     
     bool Image::indexValid( const int& row, const int& column, const int& channel ) const{
-    if (row >= getHeight() || row < 0 || column >= getWidth() || column < 0 || channel > 2 || channel < 0 ){
-        return false;
-    }
-    return true;
+        if (row >= getHeight() || row < 0 || column >= getWidth() || column < 0 || channel > 2 || channel < 0 ){
+            return false;
+        }
+        return true;
     };
 
     int Image::index( const int& row, const int& column, const int& channel ) const 
     {
-        return (row* width * 3) + (column *3) + channel;
+        return (row * width * 3) + (column * 3) + channel;
     } 
     int Image::getChannel(const int& row, const int& column, const int& channel) const
     {
