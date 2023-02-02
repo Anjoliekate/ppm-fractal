@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "Image.h"
+#include "PPM.h"
 #ifndef _IMAGE_MENU_H_
 #define _IMAGE_MENU_H_
 
@@ -16,10 +17,10 @@ void drawAsciiImage( std::istream& is, std::ostream& os, const Image& image);
 void diagonalQuadPattern( std::istream& is, std::ostream& os, Image& image);
 int assignment2( std::istream& is, std::ostream& os);
 
-/*
+
 //image_file | may need to hash out for testing purposes
 void writeUserImage( std::istream& is, std::ostream& os, const PPM& p );
 void stripedDiagonalPattern( std::istream& is, std::ostream& os, PPM& p );
 int assignment3( std::istream& is, std::ostream& os );
-*/
+
 #endif /*_IMAGE_MENU_H_*/

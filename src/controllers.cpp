@@ -1,5 +1,6 @@
 #include "image_menu.h"
 #include "Image.h"
+#include "PPM.h"
 #include <iostream>
 
 int assignment1( std::istream& is, std::ostream& os){
@@ -11,10 +12,10 @@ int assignment2( std::istream& is, std::ostream& os){
     drawAsciiImage(is, os, image);
     return 0;
 }
-/*
+
 int assignment3(std::istream is, std::ostream os){
-    PPM ppm;
-    stripedDiagonalPattern(os, is, ppm);
-    writeUserImage(os, is, ppm);
+    PPM p;
+    stripedDiagonalPattern(is, os, p);
+    writeUserImage(is, os, p);
+    return 0;
 }
-*/
