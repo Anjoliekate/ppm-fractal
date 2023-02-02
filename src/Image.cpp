@@ -24,8 +24,7 @@
         return true;
     };
 
-    int Image::index( const int& row, const int& column, const int& channel ) const 
-    {
+    int Image::index( const int& row, const int& column, const int& channel ) const{
         return (row * width * 3) + (column * 3) + channel;
     } 
     int Image::getChannel(const int& row, const int& column, const int& channel) const
