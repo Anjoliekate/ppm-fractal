@@ -7,7 +7,7 @@ PPM::PPM( )
     //The default constructor. A default PPM has max color value of 1, and a default constructed Image portion.
 
 PPM::PPM( const int& height_input, const int& width_input )
-    : maxColorVal(1), Image(width_input, height_input) {}  //The max color value should be set to 1. The Image portion should be initialized with the height and width parameters.
+    : Image(width_input, height_input), maxColorVal(1) {}  //The max color value should be set to 1. The Image portion should be initialized with the height and width parameters.
 
 int PPM::getMaxColorValue( ) const{
     return maxColorVal;
