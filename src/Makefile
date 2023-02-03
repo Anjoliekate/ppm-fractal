@@ -1,4 +1,4 @@
-all: hello questions_3 ascii_image image_file
+all: hello questions_3 ascii_image image_file 
 
 
 hello: hello.o 
@@ -48,7 +48,17 @@ image_file.o: image_file.cpp image_menu.h Image.h PPM.h
 PPM.o: PPM.cpp image_menu.h PPM.h
 	g++ -c PPM.cpp
 
+flag_romania: flag_romania.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o
+	g++ -o flag_romania flag_romania.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o
+
+flag_romania.o: flag_romania.cpp image_menu.h Image.h PPM.h
+	g++ -c flag_romania.cpp
+
+buck: buck.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o
+	g++ -o buck buck.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o
+buck.o: buck.cpp image_menu.h Image.h PPM.h
+	g++ -c buck.cpp
 
 clean:
 	-rm -f *.o
-	-rm -f hello questions_3 ascii_image image_file
+	-rm -f hello questions_3 ascii_image image_file flag_romania

@@ -32,3 +32,18 @@ int askQuestions3(std::istream& is, std::ostream& os){
     }
     return get_int;
 }
+
+int askUncleBuckQuestions(std::istream& is, std::ostream& os){
+    std::string city = getString(is, os, "Where do you live? ");
+    std::string rent = getString(is, os, "Own or rent? ");
+    int record = getInteger(is, os, "What is your record for consecutive questions asked? ");
+    std::string value;
+    if (record < 20 ){
+        value = "pretty good";
+    }
+    else{
+        value = "okay";
+    }
+    os << record << " is " << value << ". " << "Enjoy " << rent << "ing in the " << city << std::endl;
+    return record; 
+}

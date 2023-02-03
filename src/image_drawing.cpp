@@ -64,3 +64,32 @@ void diagonalQuadPattern( std::istream& is, std::ostream& os, Image& image ){
         }
     }
 }
+
+void flagRomaniaPattern( std::istream& is, std::ostream& os, PPM& p ){
+    int height = getInteger(is, os, "Image height? ");
+    p.setHeight(height);
+    int width = (height * 3);
+    p.setWidth(width);
+    p.setMaxColorValue(255);
+    int formula = height / 3;
+    int middle = formula * 2;
+    for (int row = 0; row < p.getHeight(); row++){
+        for (int column = 0; column < p.getWidth(); column++){
+            if (column < formula){
+                p.setChannel(row, column, 0, 0);
+                p.setChannel(row, column, 1, 43);
+                p.setChannel(row, column, 2, 127);
+            }
+            else if (column > formula && column <= middle){
+                p.setChannel(row, column, 0, 252);
+                p.setChannel(row, column, 1, 209);
+                p.setChannel(row, column, 2, 22);
+            }
+            else{
+                p.setChannel(row, column, 0, 206);
+                p.setChannel(row, column, 1, 17);
+                p.setChannel(row, column, 2, 38);
+            }
+        }
+    }
+}

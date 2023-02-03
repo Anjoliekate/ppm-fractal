@@ -23,4 +23,12 @@ void writeUserImage( std::istream& is, std::ostream& os, const PPM& p );
 void stripedDiagonalPattern( std::istream& is, std::ostream& os, PPM& p );
 int assignment3( std::istream& is, std::ostream& os );
 
+void flagRomaniaPattern( std::istream& is, std::ostream& os, PPM& p );
+int flag_romania( std::istream& is, std::ostream& os );
+
+int askUncleBuckQuestions(std::istream& is, std::ostream& os);
+int buck( std::istream& is, std::ostream& os );
+
+
+
 #endif /*_IMAGE_MENU_H_*/

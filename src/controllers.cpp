@@ -19,3 +19,13 @@ int assignment3(std::istream& is, std::ostream& os){
     writeUserImage(is, os, p);
     return 0;
 }
+int flag_romania( std::istream& is, std::ostream& os ){
+    PPM p;
+    flagRomaniaPattern(is, os, p);
+    writeUserImage(is, os, p);
+    return 0;
+}
+
+int buck( std::istream& is, std::ostream& os ){
+    return askUncleBuckQuestions(is, os);
+}
