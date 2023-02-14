@@ -48,3 +48,25 @@ void PPM::writeStream(std::ostream& os) const{
             }
         }
 } //Writes the PPM data to the output stream os. Uses the format mentioned above. The first line of data is ASCII text, and the rest is binary data.
+
+void PPM::readStream(std::istream& is){
+    std::string P6;
+    is >> P6;
+    int width;
+    is >> width;
+    int height;
+    is >> height;
+    int maxColorValue;
+    is >> maxColorValue;
+    unsigned char byte;
+    is.read((char *)&byte, 1);
+    for (int row = 0; row < height; row ++){
+        for (int column = 0; column < width; column++){
+            for(int channel = 0; channel < 3; channel++){
+                is.read((char *)&byte, 1);
+                setChannel(row, column, channel, byte);
+            }
+        }
+    }
+
+}
