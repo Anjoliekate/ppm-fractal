@@ -29,7 +29,7 @@ const std::string& MenuData::getDescription(const std::string& name){
         return mapCommand[name];
     }
     else{
-        empty1 = "";
+        static std::string empty1 = "";
         return empty1;
     }
 } //If name is a key in the description map, return the description associated with it. If name is not a key, return the empty string. Use a static std::string variable that is initialized to the empty string.
