@@ -22,7 +22,6 @@ ActionFunctionType MenuData::getFunction(const std::string& name){
 
 } //If name is a key in the action function map, return the function associated with it. If name is not a key, return 0.
 
-std::string empty1;
 
 const std::string& MenuData::getDescription(const std::string& name){
     if (mapCommand.count(name)!= 0){
