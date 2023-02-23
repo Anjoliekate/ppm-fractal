@@ -96,8 +96,8 @@ void flagRomaniaPattern( ActionData& action_data ){
 }
 
 void setSize( ActionData& action_data ){
-    int height = getInteger(action_data, "Image height? ");
-    int width = getInteger(action_data, "Image width? ");
+    int height = getInteger(action_data, "Height? ");
+    int width = getInteger(action_data, "Width? ");
     action_data.getInputImage1().setHeight(height);
     action_data.getInputImage1().setWidth(width);
 
@@ -111,7 +111,7 @@ void setMaxColorValue( ActionData& action_data ){
 void setChannel( ActionData& action_data ){
     int row = getInteger(action_data, "Row? ");
     int column = getInteger(action_data, "Column? ");
-    int channel = getInteger(action_data, "Channel ");
+    int channel = getInteger(action_data, "Channel? ");
     int value = getInteger(action_data, "Value? ");
     action_data.getInputImage1().setChannel(row, column, channel, value);
 }// Use getInteger to ask the user for “Row? “, “Column? “, “Channel? “, and “Value? “, then the set the channel value in input image 1.
@@ -119,7 +119,7 @@ void setChannel( ActionData& action_data ){
 void setPixel( ActionData& action_data ){
     int row = getInteger(action_data, "Row? ");
     int column = getInteger(action_data, "Column? ");
-    int red = getInteger(action_data, "Red ");
+    int red = getInteger(action_data, "Red? ");
     int green = getInteger(action_data, "Green? ");
     int blue = getInteger(action_data, "Blue? ");
     action_data.getInputImage1().setPixel(row, column, red, green, blue);

@@ -75,4 +75,4 @@ ppm_menu.o: ppm_menu.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 
 clean:
 	-rm -f *.o
-	-rm -f hello questions_3 ascii_image image_file flag_romania ActionData MenuData
+	-rm -f hello questions_3 ascii_image image_file flag_romania ActionData MenuData ppm_menu
