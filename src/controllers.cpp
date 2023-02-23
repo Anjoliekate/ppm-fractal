@@ -1,31 +1,91 @@
 #include "image_menu.h"
 #include "Image.h"
 #include "PPM.h"
+#include "ActionData.h"
 #include <iostream>
 
 int assignment1( std::istream& is, std::ostream& os){
-    return askQuestions3(is, os);
+    ActionData action_data(is, os);
+    return askQuestions3(action_data);
 }
 int assignment2( std::istream& is, std::ostream& os){
-    Image image;
-    diagonalQuadPattern(is, os, image);
-    drawAsciiImage(is, os, image);
+    ActionData action_data(is, os);
+    diagonalQuadPattern(action_data);
+    copyImage(action_data);
+    drawAsciiImage(action_data);
     return 0;
 }
 
 int assignment3(std::istream& is, std::ostream& os){
-    PPM p;
-    stripedDiagonalPattern(is, os, p);
-    writeUserImage(is, os, p);
+    ActionData action_data(is, os);
+    stripedDiagonalPattern(action_data);
+    copyImage(action_data);
+    writeUserImage(action_data);
     return 0;
 }
+void showMenu( MenuData& menu_data, ActionData& action_data ){
+    std::vector<std::string> command_line = menu_data.getNames();
+    for( std::vector<std::string>::iterator i = command_line.begin(); i != command_line.end(); i++){
+        action_data.getOS() << *i << ") " << menu_data.getDescription(*i) << std::endl;
+    }
+}
+// For each command that was added to MenuData via addAction(), displays one line of text to the 
+//output stream of the ActionData. The lines are formatted like this: “command-name) command description”. See the ShowMenu() example below.
+
+void takeAction(const std::string& choice, MenuData& menu_data, ActionData& action_data){
+    if (menu_data.getFunction(choice) != 0){
+        menu_data.getFunction(choice)(action_data);
+    }
+    else if (choice == "menu"){
+        showMenu(menu_data, action_data);
+    }
+    else{
+        action_data.getOS() << "Unknown action '" << choice << "."<< std::endl;
+    }
+}
+// Uses choice as a command name to get a ActionFunctionType from the MenuData. If the function
+// returned is not 0, then call the returned function, passing the ActionData as its parameter. Otherwise, 
+//if the choice was “menu”, call showMenu. Otherwise (if the function was 0 and choice was not “menu”), display a message with 
+//the format: “Unknown action ‘bad-choice’.”, where bad-choice should be the choice.
+
+void configureMenu( MenuData& menu_data ){
+    menu_data.addAction("draw-ascii", drawAsciiImage, "Write output image to terminal as ASCII art.");
+    menu_data.addAction("write", writeUserImage, "Write output image to file.");
+    menu_data.addAction("copy", copyImage, "Copy input image 1 to output image.");
+    menu_data.addAction("read", readUserImage1, "Read file into input image 1.");
+    menu_data.addAction("#", commentLine, "Comment to end of line.");
+    menu_data.addAction( "size", setSize, "Set the size of input image 1.");
+    menu_data.addAction( "max-color-value",	setMaxColorValue, "Set the max color value of input image 1.");
+    menu_data.addAction( "channel",	setChannel,	"Set a channel value in input image 1.");
+    menu_data.addAction( "pixel", setPixel, "Set a pixel's 3 values in input image 1.");
+    menu_data.addAction( "clear", clearAll, "Set all pixels to 0,0,0 in input image 1.");
+    menu_data.addAction( "quit", quit, "Quit.");
+}
+//Calls addAction on the MenuData object to add the commands listed below in the Table of Commands, 
+//their functions, and their descriptions.
+
+int imageMenu(std::istream& is, std::ostream& os){
+    ActionData action_data(is, os);
+    MenuData menu_data;
+    configureMenu(menu_data);
+    while(!action_data.getDone() && action_data.getIS().good()){
+        takeAction(getChoice(action_data), menu_data, action_data);
+    }
+    return 0;
+} 
+//Creates an ActionData object with is and os used for its input and output streams. Creates a MenuData object.
+// Uses configureMenu to configure the commands in the MenuData object. Uses a loop that will continue as long as the ActionData
+// object is not “done” and the ActionData object’s input stream is .good(). The body of the loop will use getChoice to get the user’s command choice, and takeAction to execute the user’s command choice. Returns 0.
+
+
 int flag_romania( std::istream& is, std::ostream& os ){
-    PPM p;
-    flagRomaniaPattern(is, os, p);
-    writeUserImage(is, os, p);
+    ActionData action_data(is, os);
+    flagRomaniaPattern(action_data);
+    copyImage(action_data);
+    writeUserImage(action_data);
     return 0;
 }
 
-int buck( std::istream& is, std::ostream& os ){
-    return askUncleBuckQuestions(is, os);
+int buck( ActionData& action_data ){
+    return askUncleBuckQuestions(action_data);
 }
