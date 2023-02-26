@@ -8,21 +8,21 @@ hello.o: hello.cpp
 	g++ -c hello.cpp
 
 
-questions_3: questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o
-	g++ -o questions_3 questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o
+questions_3: questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o
+	g++ -o questions_3 questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o
 
-questions_3.o: questions_3.cpp image_menu.h PPM.h 
+questions_3.o: questions_3.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c questions_3.cpp
 
 user_io.o: user_io.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c user_io.cpp
 
-controllers.o: controllers.cpp user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o
+controllers.o: controllers.cpp user_io.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o ppm_menu.o 
 	g++ -c controllers.cpp
 
 
-ascii_image: ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o
-	g++ -o ascii_image ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o
+ascii_image: ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o
+	g++ -o ascii_image ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o
 
 ascii_image.o: ascii_image.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c ascii_image.cpp
@@ -38,13 +38,13 @@ Image.o: Image.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 
 
 
-image_file: image_file.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o ActionData.o MenuData.o 
-	g++ -o image_file image_file.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o ActionData.o MenuData.o 
+image_file: image_file.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o 
+	g++ -o image_file image_file.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o 
 
 image_file.o: image_file.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c image_file.cpp 
 
-PPM.o: PPM.cpp image_menu.h PPM.h MenuData.h ActionData.h
+PPM.o: PPM.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c PPM.cpp
 
 flag_romania: flag_romania.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o
@@ -59,15 +59,15 @@ buck.o: buck.cpp image_menu.h Image.h PPM.h
 	g++ -c buck.cpp
 
 
-ActionData.o: ActionData.cpp image_menu.h ActionData.h 
+ActionData.o: ActionData.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c ActionData.cpp
 
-MenuData.o: MenuData.cpp image_menu.h MenuData.h 
+MenuData.o: MenuData.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h 
 	g++ -c MenuData.cpp
 
 
-ppm_menu: ppm_menu.o  user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o ActionData.o MenuData.o 
-	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o ActionData.o MenuData.o 
+ppm_menu: ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o 
+	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o
 
 ppm_menu.o: ppm_menu.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c ppm_menu.cpp 
