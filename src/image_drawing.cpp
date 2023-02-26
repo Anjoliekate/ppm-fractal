@@ -125,11 +125,9 @@ void setPixel( ActionData& action_data ){
     action_data.getInputImage1().setPixel(row, column, red, green, blue);
 } //Use getInteger to ask the user for “Row? “, “Column? “, “Red? “, “Green? “, and “Blue? “, then the set the values in input image 1.
 
-void clearAll( ActionData& action_data ){//double check this one
-    int row;
-    int column;
-    for (row = 0; row < action_data.getInputImage1().getHeight(); row++){
-        for (column = 0; action_data.getInputImage1().getWidth(); column++){
+void clearAll( ActionData& action_data ){
+    for (int row = 0; row < action_data.getInputImage1().getHeight(); row++){
+        for (int column = 0; column < action_data.getInputImage1().getWidth(); column++){
     action_data.getInputImage1().setPixel(row, column, 0,0,0);
     }
     }

@@ -35,7 +35,7 @@ int askQuestions3(ActionData& action_data){
 }
 
 std::string getChoice( ActionData& action_data ){
-    return getString(action_data, ("Choice? "));
+    return getString(action_data, "Choice? ");
 }
 
 void commentLine( ActionData& action_data ){
@@ -51,7 +51,7 @@ void commentLine( ActionData& action_data ){
 }
 
 void quit(ActionData& action_data){
-    return action_data.setDone();
+    action_data.setDone();
 }
 
 int askUncleBuckQuestions(ActionData& action_data){

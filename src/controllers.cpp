@@ -40,7 +40,7 @@ void takeAction(const std::string& choice, MenuData& menu_data, ActionData& acti
         showMenu(menu_data, action_data);
     }
     else{
-        action_data.getOS() << "Unknown action '" << choice << "."<< std::endl;
+        action_data.getOS() << "Unknown action '" << choice << "'."<< std::endl;
     }
 }
 // Uses choice as a command name to get a ActionFunctionType from the MenuData. If the function
@@ -52,7 +52,7 @@ void configureMenu( MenuData& menu_data ){
     menu_data.addAction("draw-ascii", drawAsciiImage, "Write output image to terminal as ASCII art.");
     menu_data.addAction("write", writeUserImage, "Write output image to file.");
     menu_data.addAction("copy", copyImage, "Copy input image 1 to output image.");
-    menu_data.addAction("read", readUserImage1, "Read file into input image 1.");
+    menu_data.addAction("read1", readUserImage1, "Read file into input image 1.");
     menu_data.addAction("#", commentLine, "Comment to end of line.");
     menu_data.addAction( "size", setSize, "Set the size of input image 1.");
     menu_data.addAction( "max-color-value",	setMaxColorValue, "Set the max color value of input image 1.");

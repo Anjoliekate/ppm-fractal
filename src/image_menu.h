@@ -28,7 +28,7 @@ int assignment3( std::istream& is, std::ostream& os );
 std::string getChoice( ActionData& action_data ); 
 void commentLine( ActionData& action_data ); 
 void quit(ActionData& action_data);
-void clearAll( ActionData& action_data ); 
+void clearAll(ActionData& action_data); 
 void setSize( ActionData& action_data );
 void setMaxColorValue( ActionData& action_data );
 void setChannel( ActionData& action_data );
