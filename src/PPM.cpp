@@ -73,3 +73,213 @@ void PPM::readStream(std::istream& is){
     }
 
 }
+//multiply *this and rhs then test each condition and return it
+
+bool PPM::operator==( const PPM& rhs ) const{ 
+    return (getHeight() * getWidth() == rhs.getHeight()* getWidth());
+} 
+bool PPM::operator!=( const PPM& rhs ) const{
+    return (getHeight() * getWidth() != rhs.getHeight()* getWidth());
+  
+}
+bool PPM::operator<( const PPM& rhs ) const{
+    return (getHeight() * getWidth() < rhs.getHeight()* getWidth());
+  
+}
+bool PPM::operator>( const PPM& rhs ) const{
+    return (getHeight() * getWidth() > rhs.getHeight()* getWidth());
+  
+}
+bool PPM::operator<=( const PPM& rhs ) const{
+    return (getHeight() * getWidth() <= rhs.getHeight()* getWidth());
+  
+}
+bool PPM::operator>=( const PPM& rhs ) const{
+    return (getHeight() * getWidth() >= rhs.getHeight()* getWidth());
+}
+
+PPM& PPM::operator+=( const PPM& rhs ){//use ternary for cleaner code and ease of use
+    int maxCV = getMaxColorValue();
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) + rhs.getChannel(row, column, 0));
+            redChannel = redChannel > maxCV ? maxCV : redChannel;
+            int greenChannel = (getChannel(row, column, 1) + rhs.getChannel(row, column, 1));
+            greenChannel = greenChannel > maxCV ? maxCV : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) + rhs.getChannel(row, column, 2));
+            blueChannel = blueChannel > maxCV ? maxCV : blueChannel;              
+            setChannel(row, column, 0, redChannel);
+            setChannel(row, column, 1, greenChannel);
+            setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return *this;
+} // Assumes *this and rhs have the same width and height. Adds the channel values from rhs into the channels 
+//for *this. If the resulting value is larger than max color value, set to max color value. Returns *this.
+
+PPM& PPM::operator-=( const PPM& rhs ){
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) - rhs.getChannel(row, column, 0));
+            redChannel = redChannel < 0 ? 0 : redChannel;
+            int greenChannel = (getChannel(row, column, 1) - rhs.getChannel(row, column, 1));
+            greenChannel = greenChannel < 0 ? 0 : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) - rhs.getChannel(row, column, 2));
+            blueChannel = blueChannel < 0 ? 0 : blueChannel;
+            setChannel(row, column, 0, redChannel);
+            setChannel(row, column, 1, greenChannel);
+            setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return *this;
+} 
+//Assumes *this and rhs have the same width and height. Subtracts the channel values from rhs
+// from the channels for *this. If the resulting value is less than 0, set to 0. Returns *this.
+
+PPM& PPM::operator*=( const double& rhs ){ //comeback to this one
+    int maxCV = getMaxColorValue();
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) * rhs);
+            redChannel = redChannel > maxCV ? maxCV : redChannel;
+            redChannel = redChannel < 0 ? 0 : redChannel;
+            int greenChannel = (getChannel(row, column, 1) * rhs);
+            greenChannel = greenChannel > maxCV ? maxCV : greenChannel;
+            greenChannel = greenChannel < 0 ? 0 : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) * rhs);
+            blueChannel = blueChannel > maxCV ? maxCV : blueChannel;
+            blueChannel = blueChannel < 0 ? 0 : blueChannel;
+            setChannel(row, column, 0, redChannel);
+            setChannel(row, column, 1, greenChannel);
+            setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return *this;
+} 
+// Multiples every channel value of *this by rhs. If the resulting value
+// is larger than max color value, set to max color value. If the resulting
+// value is less than 0, set to 0. Returns *this.
+
+
+PPM& PPM::operator/=( const double& rhs ){
+    int maxCV = getMaxColorValue();
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) / rhs);
+            redChannel = redChannel > maxCV ? maxCV : redChannel;
+            redChannel = redChannel < 0 ? 0 : redChannel;
+            int greenChannel = (getChannel(row, column, 1) / rhs);
+            greenChannel = greenChannel > maxCV ? maxCV : greenChannel;
+            greenChannel = greenChannel < 0 ? 0 : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) / rhs);
+            blueChannel = blueChannel > maxCV ? maxCV : blueChannel;
+            blueChannel = blueChannel < 0 ? 0 : blueChannel;
+            setChannel(row, column, 0, redChannel);
+            setChannel(row, column, 1, greenChannel);
+            setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return *this;
+} 
+//Divides every channel value of *this by rhs. If the resulting value is larger 
+//than max color value, set to max color value. If the resulting value is less than 0, set to 0. Returns *this.
+
+PPM PPM::operator+( const PPM& rhs ) const{
+    PPM ppm(getHeight(), getWidth());
+    int maxCV = getMaxColorValue();
+    ppm.setMaxColorValue(maxCV);
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) + rhs.getChannel(row, column, 0));
+            redChannel = redChannel > maxCV ? maxCV : redChannel;
+            int greenChannel = (getChannel(row, column, 1) + rhs.getChannel(row, column, 1));
+            greenChannel = greenChannel > maxCV ? maxCV : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) + rhs.getChannel(row, column, 2));
+            blueChannel = blueChannel > maxCV ? maxCV : blueChannel;
+            ppm.setChannel(row, column, 0, redChannel);
+            ppm.setChannel(row, column, 1, greenChannel);
+            ppm.setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return ppm;
+} 
+//Creates a new PPM object with the same meta data (height, width, max color value) as *this. 
+//Sets the channel values in the new object to the sum of the channel values for *this and rhs. 
+//If the value is greater than max color value, set to max color value. Returns the new object.
+
+PPM PPM::operator-( const PPM& rhs ) const{
+    PPM ppm(getHeight(), getWidth());
+    int maxCV = getMaxColorValue();
+    ppm.setMaxColorValue(maxCV);
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) - rhs.getChannel(row, column, 0));
+            redChannel = redChannel < 0 ? 0 : redChannel;
+            int greenChannel = (getChannel(row, column, 1) - rhs.getChannel(row, column, 1));
+            greenChannel = greenChannel < 0 ? 0 : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) - rhs.getChannel(row, column, 2));
+            blueChannel = blueChannel < 0 ? 0 : blueChannel;
+            ppm.setChannel(row, column, 0, redChannel);
+            ppm.setChannel(row, column, 1, greenChannel);
+            ppm.setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return ppm;
+} //Creates a new PPM object with the same meta data (height, width, max color value) 
+//as *this. Sets the channel values in the new object to the difference of the channel values for *this and rhs. 
+//If the value is less than 0, set to 0. Returns the new object.
+
+PPM PPM::operator*( const double& rhs ) const{
+    PPM ppm(getHeight(), getWidth());
+    int maxCV = getMaxColorValue();
+    ppm.setMaxColorValue(maxCV);
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) * rhs);
+            redChannel = redChannel > maxCV ? maxCV : redChannel;
+            redChannel = redChannel < 0 ? 0 : redChannel;
+            int greenChannel = (getChannel(row, column, 1) * rhs);
+            greenChannel = greenChannel > maxCV ? maxCV : greenChannel;
+            greenChannel = greenChannel < 0 ? 0 : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) * rhs);
+            blueChannel = blueChannel > maxCV ? maxCV : blueChannel;
+            blueChannel = blueChannel < 0 ? 0 : blueChannel;
+            ppm.setChannel(row, column, 0, redChannel);
+            ppm.setChannel(row, column, 1, greenChannel);
+            ppm.setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return ppm;
+}//Creates a new PPM object with the same meta data (height, width, max color value)
+// as *this. Sets the channel values in the new object to the product of the channel 
+//values for *this and the value of rhs. If the value is greater than max color value, set to max color value.
+// If the value is less than 0, set to 0. Returns the new object.
+
+PPM PPM::operator/( const double& rhs ) const{
+    PPM ppm(getHeight(), getWidth());
+    int maxCV = getMaxColorValue();
+    ppm.setMaxColorValue(maxCV);
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) / rhs);
+            redChannel = redChannel > maxCV ? maxCV : redChannel;
+            redChannel = redChannel < 0 ? 0 : redChannel;
+            int greenChannel = (getChannel(row, column, 1) / rhs);
+            greenChannel = greenChannel > maxCV ? maxCV : greenChannel;
+            greenChannel = greenChannel < 0 ? 0 : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) / rhs);
+            blueChannel = blueChannel > maxCV ? maxCV : blueChannel;
+            blueChannel = blueChannel < 0 ? 0 : blueChannel;
+            ppm.setChannel(row, column, 0, redChannel);
+            ppm.setChannel(row, column, 1, greenChannel);
+            ppm.setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return ppm;
+} 
+//Creates a new PPM object with the same meta data (height, width, max color value)
+// as *this. Sets the channel values in the new object to the division of the channel
+// values of *this and by the value of rhs. If the value is greater than max color value, 
+//set to max color value. If the value is less than 0, set to 0. Returns the new object.
+
+

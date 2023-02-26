@@ -81,3 +81,17 @@ void drawAsciiImage( ActionData& action_data ){
     //“Input filename? ” as the prompt. Opens the file as an std::ifstream, then uses readStream() to read the file into 
     //the input image 1. If the file does not open correctly, report to the that the file could not be opened. For example, if the file was 
     //named “foo.ppm”, then the message should be “‘foo.ppm’ could not be opened.”
+
+    void readUserImage2( ActionData& action_data ){
+        std::string fileName = getString(action_data, "Input filename? ");
+        std::ifstream file(fileName);
+        if (!file.is_open()){
+            action_data.getOS() << "'" << fileName << "' could not be opened." << std::endl;
+            
+        }
+        else{
+            action_data.getInputImage2().readStream(file);
+            file.close();
+        }
+
+    }//like readuserImage1 but for image 2

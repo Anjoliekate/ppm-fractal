@@ -41,6 +41,17 @@ void configureMenu( MenuData& menu_data );
 int imageMenu(std::istream& is, std::ostream& os); 
 
 
+//operators
+void plusEquals( ActionData& action_data );
+void minusEquals( ActionData& action_data );
+void timesEquals( ActionData& action_data );
+void divideEquals( ActionData& action_data );
+void plus( ActionData& action_data );
+void minus( ActionData& action_data );
+void times( ActionData& action_data );
+void divide( ActionData& action_data );
+void readUserImage2( ActionData& action_data );
+
 //exam 1
 void flagRomaniaPattern( ActionData& action_data );
 int flag_romania( std::istream& is, std::ostream& os );

@@ -1,4 +1,4 @@
-all: hello questions_3 ascii_image image_file ActionData.o MenuData.o ppm_menu
+all: hello questions_3 ascii_image image_file ActionData.o MenuData.o ppm_menu 
 
 
 hello: hello.o 
@@ -14,12 +14,11 @@ questions_3: questions_3.o user_io.o controllers.o Image.o image_drawing.o image
 questions_3.o: questions_3.cpp image_menu.h PPM.h 
 	g++ -c questions_3.cpp
 
-user_io.o: user_io.cpp
+user_io.o: user_io.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c user_io.cpp
 
-controllers.o: controllers.cpp image_menu.h Image.h PPM.h ActionData.h MenuData.h
+controllers.o: controllers.cpp user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o
 	g++ -c controllers.cpp
-
 
 
 ascii_image: ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o
@@ -70,8 +69,12 @@ MenuData.o: MenuData.cpp image_menu.h MenuData.h
 ppm_menu: ppm_menu.o  user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o ActionData.o MenuData.o 
 	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o ActionData.o MenuData.o 
 
-ppm_menu.o: ppm_menu.cpp image_menu.h MenuData.h ActionData.h
+ppm_menu.o: ppm_menu.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c ppm_menu.cpp 
+
+
+image_filters.o: image_filters.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
+	g++ -c image_filters.cpp
 
 clean:
 	-rm -f *.h.gch

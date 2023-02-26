@@ -16,8 +16,27 @@ class PPM: public Image{
         void setPixel( const int& row, const int& column, const int& red, const int& green, const int& blue ); //Set all three channels for the specified pixel. Should use setChannel to do the work.
         void writeStream(std::ostream& os) const; //Writes the PPM data to the output stream os. Uses the format mentioned above. The first line of data is ASCII text, and the rest is binary data.
         void readStream(std::istream& is);
+    
+        bool operator==( const PPM& rhs ) const; 
+        bool operator!=( const PPM& rhs ) const;
+        bool operator<( const PPM& rhs ) const;
+        bool operator<=( const PPM& rhs ) const;
+        bool operator>( const PPM& rhs ) const;
+        bool operator>=( const PPM& rhs ) const;
+        PPM& operator+=( const PPM& rhs ); 
+        PPM& operator-=( const PPM& rhs );
+        PPM& operator*=( const double& rhs );
+        PPM& operator/=( const double& rhs );
+        PPM operator+( const PPM& rhs ) const;
+        PPM operator-( const PPM& rhs ) const;
+        PPM operator*( const double& rhs ) const;
+        PPM operator/( const double& rhs ) const; 
+    
     private:
         int maxColorVal;
+
+
+
 };
 #endif
 /* using write and using bytes
