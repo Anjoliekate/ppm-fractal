@@ -75,6 +75,9 @@ void configureMenu( MenuData& menu_data ){
     menu_data.addAction( "linear-gray", grayFromLinearColorimetric,	"Set output image by linear colorimetric grayscale on input image 1.");
     menu_data.addAction( "circle", drawCircle, "Draw a circle shape in input image 1.");
     menu_data.addAction("box", drawBox , "Draw a box shape in input image 1.");
+    menu_data.addAction("orange", orangeFilter, "Set output image from orange filter on input image 1.");
+    menu_data.addAction("square", drawSquare, "Draw a square shape in input image 1." );
+    menu_data.addAction("+=int", plusEqualsInt, "Set input image 1 by adding by an integer.");
 }
 //Calls addAction on the MenuData object to add the commands listed below in the Table of Commands, 
 //their functions, and their descriptions.

@@ -65,6 +65,9 @@ int flag_romania( std::istream& is, std::ostream& os );
 int askUncleBuckQuestions(ActionData& action_data);
 int buck( std::istream& is, std::ostream& os );
 
-
+//exam 2
+void orangeFilter(ActionData& action_data);
+void drawSquare(ActionData& action_data);
+void plusEqualsInt( ActionData& action_data );
 
 #endif /*_IMAGE_MENU_H_*/

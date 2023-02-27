@@ -337,4 +337,50 @@ void PPM::grayFromLinearColorimetric( PPM& dst ) const{
 // Sets dst to have the same meta-data as *this. Sets every pixel in dst to have all channels
 // (Red, Green and Blue) set to the linear colorimetric value calculated for the pixel at the 
 //same location in *this.
-
+void PPM::orangeFilter(PPM& dst) const{
+    int height = getHeight();
+    int width = getWidth();
+    int maxCV = getMaxColorValue();
+    dst.setHeight(height);
+    dst.setWidth(width);
+    dst.setMaxColorValue(maxCV);
+    
+    for (int row = 0; row < height; row++){
+        for (int column = 0; column < width; column++){
+            int old_red =getChannel(row, column, 0);
+            int old_green = getChannel(row, column, 1);
+            int old_blue = getChannel(row, column, 1); 
+            
+            int new_red = 2*(2*old_red + old_green)/3;
+            int new_green = 2*(2*old_red + old_green)/6;
+            int new_blue = old_blue/2;
+            if (new_red > maxCV){
+                new_red = maxCV;
+            }
+            else if (new_green > maxCV){
+                new_green = maxCV;
+            }
+            else if (new_blue > maxCV){
+                new_blue = maxCV;
+            }
+            dst.setPixel(row, column, new_red, new_green, new_blue);
+        }
+    }
+}
+PPM& PPM::operator+=( const int& rhs ){
+    int maxCV = getMaxColorValue();
+    for (int row = 0; row < getHeight(); row++){
+        for(int column = 0; column < getWidth(); column++){
+            int redChannel = (getChannel(row, column, 0) + rhs);
+            redChannel = redChannel > maxCV ? maxCV : redChannel;
+            int greenChannel = (getChannel(row, column, 1) + rhs);
+            greenChannel = greenChannel > maxCV ? maxCV : greenChannel;
+            int blueChannel = (getChannel(row, column, 2) + rhs);
+            blueChannel = blueChannel > maxCV ? maxCV : blueChannel;              
+            setChannel(row, column, 0, redChannel);
+            setChannel(row, column, 1, greenChannel);
+            setChannel(row, column, 2, blueChannel);
+        }
+    }
+    return *this;
+}     

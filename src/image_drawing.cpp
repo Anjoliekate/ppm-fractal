@@ -179,3 +179,17 @@ void drawBox(ActionData& action_data){
 // with the color specified by the red, green and blue. All pixels that have a row between 
 //the top and bottom row (inclusive) and between the left and right column (inclusive) should
 // be set. Make changes to the input image 1.
+
+void drawSquare(ActionData& action_data){
+    int rowCenter = getInteger(action_data, "Row? ");
+    int columnCenter = getInteger(action_data, "Column? ");
+    int size = getInteger(action_data, "Size? ");
+    int red = getInteger(action_data, "Red? ");
+    int green = getInteger(action_data, "Green? ");
+    int blue = getInteger(action_data, "Blue? ");
+    for (int row = size; row <= rowCenter*2; row++ ){
+        for (int column = size; column <= columnCenter*2; column ++)
+        action_data.getInputImage1().setPixel(row, column, red, green, blue);
+    }
+
+}

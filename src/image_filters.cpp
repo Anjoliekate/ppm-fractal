@@ -56,3 +56,13 @@ void grayFromLinearColorimetric(ActionData& action_data){
     action_data.getInputImage1().grayFromLinearColorimetric(gray);
     action_data.getOutputImage() = gray;
 } //Sets the output image to be the linear colorimetric grayscale filtered copy of input image 1.
+void orangeFilter(ActionData& action_data){
+    PPM orange;
+    action_data.getInputImage1().orangeFilter(orange);
+    action_data.getOutputImage() = orange;
+}
+void plusEqualsInt( ActionData& action_data ){
+    double boost = getDouble(action_data, "Boost? ");
+    action_data.getInputImage1()+= boost;
+
+}

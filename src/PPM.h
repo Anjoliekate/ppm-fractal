@@ -22,7 +22,7 @@ class PPM: public Image{
         void grayFromBlue( PPM& dst ) const; 
         double linearColorimetricPixelValue( const int& row, const int& column ) const; 
         void grayFromLinearColorimetric( PPM& dst ) const;
-
+        void orangeFilter(PPM& dst) const;
 
         bool operator==( const PPM& rhs ) const; 
         bool operator!=( const PPM& rhs ) const;
@@ -38,7 +38,7 @@ class PPM: public Image{
         PPM operator-( const PPM& rhs ) const;
         PPM operator*( const double& rhs ) const;
         PPM operator/( const double& rhs ) const; 
-        
+        PPM& operator+=( const int& rhs ); 
     
     private:
         int maxColorVal;
