@@ -282,4 +282,59 @@ PPM PPM::operator/( const double& rhs ) const{
 // values of *this and by the value of rhs. If the value is greater than max color value, 
 //set to max color value. If the value is less than 0, set to 0. Returns the new object.
 
+void PPM::grayFromChannel( PPM& dst, const int& src_channel ) const{
+    int height = getHeight();
+    int width = getWidth();
+    int maxCV = getMaxColorValue();
+    dst.setHeight(height);
+    dst.setWidth(width);
+    dst.setMaxColorValue(maxCV);
+    for (int row = 0; row < height; row++ ){
+        for (int column = 0; column < width; column++){
+            int channelVal = getChannel(row, column, src_channel);
+            dst.setChannel(row, column, 0, channelVal);
+            dst.setChannel(row, column, 1, channelVal);
+            dst.setChannel(row, column, 2, channelVal);
+        }
+    }
+
+
+}
+// Configures the meta-data of dst to be the same as the meta-data of *this. The meta-data includes the height, width, and maximum color value. For a given pixel in *this, copy the src_channel channel value into all three channels of the same pixel of dst. For example, if the pixel of at row 3 and column 7 of *this has a blue channel value of 18, and src_channel is 2, then the pixel at row 3 and column 7 of dst will have red, green, and blue channel values set to 18.
+void PPM::grayFromRed( PPM& dst ) const{
+    grayFromChannel(dst, 0);
+} 
+//Calls grayFromChannel to set dst from the red channel.
+void PPM::grayFromGreen( PPM& dst ) const{
+    grayFromChannel(dst, 1);
+}
+// Calls grayFromChannel to set dst from the green channel.
+void PPM::grayFromBlue( PPM& dst ) const{
+    grayFromChannel(dst, 2);
+} 
+//Calls grayFromChannel to set dst from the blue channel.
+double PPM::linearColorimetricPixelValue( const int& row, const int& column ) const{
+    return (0.2126 * getChannel(row, column, 0))+(0.7152 * getChannel(row, column, 1))+(0.0722 * getChannel(row, column, 2));
+} 
+//Calculates the linear colorimetric value for the pixel at row, column, and returns it.
+void PPM::grayFromLinearColorimetric( PPM& dst ) const{
+    int height = getHeight();
+    int width = getWidth();
+    int maxCV = getMaxColorValue();
+    dst.setHeight(height);
+    dst.setWidth(width);
+    dst.setMaxColorValue(maxCV);
+    for (int row = 0; row < height; row++ ){
+        for (int column = 0; column < width; column++){
+            double channelVal = linearColorimetricPixelValue(row, column);
+            dst.setChannel(row, column, 0, channelVal);
+            dst.setChannel(row, column, 1, channelVal);
+            dst.setChannel(row, column, 2, channelVal);
+        }
+    }
+
+}
+// Sets dst to have the same meta-data as *this. Sets every pixel in dst to have all channels
+// (Red, Green and Blue) set to the linear colorimetric value calculated for the pixel at the 
+//same location in *this.
 

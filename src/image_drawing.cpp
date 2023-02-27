@@ -2,6 +2,7 @@
 #include "image_menu.h"
 #include "PPM.h"
 #include "ActionData.h"
+#include <cmath>
 
 void diagonalQuadPattern( ActionData& action_data  ){
     int height = getInteger(action_data, "Image height? ");
@@ -132,3 +133,49 @@ void clearAll( ActionData& action_data ){
     }
     }
 } //Set all pixels in input image 1 to have the color (0,0,0).
+
+void drawCircle(ActionData& action_data){
+    int centerR = getInteger(action_data, "Center Row? ");
+    int centerC = getInteger(action_data, "Center Column? ");
+    int radius = getInteger(action_data, "Radius? ");
+    int red = getInteger(action_data, "Red? ");
+    int green = getInteger(action_data, "Green? ");
+    int blue = getInteger(action_data, "Blue? ");
+    for (int row = 0; row < action_data.getInputImage1().getHeight(); row++){
+        for(int column = 0; column < action_data.getInputImage1().getWidth(); column++){
+            int circleRow = row - centerR; 
+            int circleColumn = column - centerC;
+            double size = std::sqrt((circleRow * circleRow)+(circleColumn * circleColumn));
+            if (size <= radius){
+                action_data.getInputImage1().setPixel(row, column, red, green, blue);
+            }
+        }
+    }
+
+
+} //Asks the user for “Center Row? “, “Center Column? “, “Radius? “, “Red? “, “Green? “, and “Blue? “.
+// Then fills in a circle shape with the color specified by the red, green and blue. All pixels that are no 
+//more than radius pixels from the center should be set. Distance is calculated as the square root of the sum
+// of row difference squared and column difference squared. You could #include <cmath> and use std::sqrt( ) to 
+//calculate the square root, or use the math trick shown in class. Use multiplication (*) to square values. Note
+// that std::sqrt() will return a double value, so use the correct variable type to store the result. Make changes to the input image 1.
+
+
+void drawBox(ActionData& action_data){
+    int topRow = getInteger(action_data, "Top Row? ");
+    int leftColumn = getInteger(action_data, "Left Column? ");
+    int bottomRow = getInteger(action_data, "Bottom Row? ");
+    int rightColumn = getInteger(action_data, "Right Column? ");
+    int red = getInteger(action_data, "Red? ");
+    int green = getInteger(action_data, "Green? ");
+    int blue = getInteger(action_data, "Blue? ");
+    for (int row = topRow; row <= bottomRow; row++){
+        for(int column = leftColumn; column <= rightColumn; column++){
+            action_data.getInputImage1().setPixel(row, column, red, green, blue);
+        }
+    }
+}// Asks the user for “Top Row? “, “Left Column? “, “Bottom Row? “, 
+//“Right Column?”, “Red? “, “Green? “, and “Blue? “. Then fills in a rectangle shape
+// with the color specified by the red, green and blue. All pixels that have a row between 
+//the top and bottom row (inclusive) and between the left and right column (inclusive) should
+// be set. Make changes to the input image 1.
