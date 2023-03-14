@@ -78,12 +78,16 @@ void configureMenu( MenuData& menu_data ){
     menu_data.addAction("orange", orangeFilter, "Set output image from orange filter on input image 1.");
     menu_data.addAction("square", drawSquare, "Draw a square shape in input image 1." );
     menu_data.addAction("+=int", plusEqualsInt, "Set input image 1 by adding by an integer.");
+    menu_data.addAction("grid",	configureGrid,	"Configure the grid.");
+    menu_data.addAction("grid-set",	setGrid, "Set a single value in the grid.");
+    menu_data.addAction("grid-apply", applyGrid,	"Use the grid values to set colors in the output image.");
 }
 //Calls addAction on the MenuData object to add the commands listed below in the Table of Commands, 
 //their functions, and their descriptions.
 
 int imageMenu(std::istream& is, std::ostream& os){
     ActionData action_data(is, os);
+    action_data.setGrid(new NumberGrid);
     MenuData menu_data;
     configureMenu(menu_data);
     while(!action_data.getDone() && action_data.getIS().good()){

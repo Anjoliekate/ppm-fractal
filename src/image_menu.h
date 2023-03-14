@@ -58,6 +58,12 @@ void grayFromLinearColorimetric(ActionData& action_data);
 void drawCircle(ActionData& action_data);
 void drawBox(ActionData& action_data); 
 
+
+//numbergrid
+void configureGrid(ActionData& action_data); 
+void setGrid(ActionData& action_data);
+void applyGrid(ActionData& action_data); 
+
 //exam 1
 void flagRomaniaPattern( ActionData& action_data );
 int flag_romania( std::istream& is, std::ostream& os );

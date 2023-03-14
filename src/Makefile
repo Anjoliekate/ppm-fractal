@@ -66,10 +66,10 @@ MenuData.o: MenuData.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
 	g++ -c MenuData.cpp
 
 
-ppm_menu: ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o 
-	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o
+ppm_menu: ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o
+	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o
 
-ppm_menu.o: ppm_menu.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
+ppm_menu.o: ppm_menu.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h
 	g++ -c ppm_menu.cpp 
 
 

@@ -193,3 +193,26 @@ void drawSquare(ActionData& action_data){
     }
 
 }
+
+void configureGrid(ActionData& action_data){
+    int gridHeight = getInteger(action_data, "Grid Height? ");
+    int gridWidth = getInteger(action_data, "Grid Width? ");
+    int gridMaxValue = getInteger(action_data, "Grid Max Value? ");
+    NumberGrid gridPointer = action_data.getGrid();
+    action_data.getGrid().setGridSize(gridHeight, gridWidth);
+    action_data.getGrid().setMaxNumber(gridMaxValue);
+
+} //Prompt the user for integers “Grid Height? “, “Grid Width? “, and “Grid Max Value? “.
+// Use them to configure the NumberGrid object in the ActionData.
+
+void setGrid(ActionData& action_data){
+    int gridRow = getInteger(action_data, "Grid Row? ");
+    int gridColumn = getInteger(action_data, "Grid Column? ");
+    int gridValue = getInteger(action_data,"Grid Value? " );
+    action_data.getGrid().setNumber(gridRow, gridColumn, gridValue);
+} //Prompt the user for integers “Grid Row? “, “Grid Column? “, and “Grid Value? “. 
+//Use them to set a number in the NumberGrid object of ActionData.
+
+void applyGrid(ActionData& action_data){
+    action_data.getGrid().setPPM(action_data.getOutputImage());
+} //Configure the output image using the number grid.
