@@ -3,6 +3,7 @@
 #include <iostream>
 #include "PPM.h"
 #include "NumberGrid.h"
+#include "ColorTable.h"
 
 class ActionData{
 
@@ -18,6 +19,9 @@ public:
     ~ActionData(); 
     NumberGrid& getGrid();
     void setGrid(NumberGrid *grid);
+    ColorTable& getTable(); 
+    
+
 
     
 private:
@@ -28,5 +32,6 @@ private:
     PPM outputImage; //We will call this the “output image”. This is the PPM object that will be used when the user writes an image to a file. The main way to change this object is for the user to ask for the input image 1 to be copied to it.
     bool Quit; //This data member keeps track of whether the user has asked for the application to be done (quit).
     NumberGrid *gridPointer;
+    ColorTable colorTableObject;
 };
 #endif 

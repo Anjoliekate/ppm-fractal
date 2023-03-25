@@ -2,6 +2,7 @@
 #include "image_menu.h"
 #include "PPM.h"
 #include "ActionData.h"
+#include "ColorTable.h"
 #include <cmath>
 
 void diagonalQuadPattern( ActionData& action_data  ){
@@ -216,3 +217,59 @@ void setGrid(ActionData& action_data){
 void applyGrid(ActionData& action_data){
     action_data.getGrid().setPPM(action_data.getOutputImage());
 } //Configure the output image using the number grid.
+
+void setColorTableSize(ActionData& action_data){
+    int size = getInteger(action_data, "Size? ");
+    action_data.getTable().setNumberOfColors(size);
+}
+//Asks the user for the “Size? “, then applies it to the color table.
+
+void setColor(ActionData& action_data){
+    int position = getInteger(action_data, "Position? ");
+    int red = getInteger(action_data, "Red? ");
+    int green = getInteger(action_data, "Green? ");
+    int blue = getInteger(action_data, "Blue? ");
+    action_data.getTable()[position].setChannel(0, red);
+    action_data.getTable()[position].setChannel(1, green);
+    action_data.getTable()[position].setChannel(2, blue);
+}
+// Asks the user for “Position? “, “Red? “, “Green? “, and “Blue? “.
+// Then uses them to set a color at the specified position in the color table.
+
+void setRandomColor(ActionData& action_data){//comeback to this
+    int position = getInteger(action_data, "Position? ");
+    action_data.getTable().setRandomColor(255, position);
+
+}
+// Asks the user for “Position? “, then uses setRandomColor() to set a
+// random color at that position in the color table. Use 255 for the maximum color value.
+
+void setColorGradient(ActionData& action_data){
+    int firstPosition = getInteger(action_data, "First position? ");
+    int firstRed = getInteger(action_data, "First red? ");
+    int firstGreen = getInteger(action_data, "First green? ");
+    int firstBlue = getInteger(action_data, "First blue? ");
+    int secondPosition = getInteger(action_data, "Second position? ");
+    int secondRed = getInteger(action_data, "Second red? ");
+    int secondGreen = getInteger(action_data, "Second green? ");
+    int secondBlue = getInteger(action_data, "Second blue? ");
+    Color firstColor;
+    firstColor.setRed(firstRed);
+    firstColor.setGreen(firstGreen);
+    firstColor.setBlue(firstBlue);
+    Color secondColor;
+    secondColor.setRed(secondRed);
+    secondColor.setGreen(secondGreen);
+    secondColor.setBlue(secondBlue);
+    action_data.getTable().insertGradient(firstColor, secondColor, firstPosition, secondPosition);
+}
+// Asks the user for “First position? “, “First red? “, “First green? “, “First blue? “,
+// “Second position? “, “Second red? “, “Second green? ” and “Second blue? “. The uses 
+//them to insertGradient() in the color table.
+
+void applyGridColorTable(ActionData& action_data){
+    action_data.getGrid().setPPM(action_data.getOutputImage(), action_data.getTable());
+}
+// Uses the new setPPM method of the grid to set the output image PPM
+// using color table. Note this is not a replacement for applyGrid, this is in
+// addition to that function.

@@ -4,6 +4,7 @@
 #include "PPM.h"
 #include "ActionData.h"
 #include "MenuData.h"
+#include "ColorTable.h"
 #ifndef _IMAGE_MENU_H_
 #define _IMAGE_MENU_H_
 
@@ -63,6 +64,13 @@ void drawBox(ActionData& action_data);
 void configureGrid(ActionData& action_data); 
 void setGrid(ActionData& action_data);
 void applyGrid(ActionData& action_data); 
+
+//Color tables
+void setColorTableSize(ActionData& action_data);
+void setColor(ActionData& action_data);
+void setRandomColor(ActionData& action_data); 
+void setColorGradient(ActionData& action_data);
+void applyGridColorTable(ActionData& action_data);
 
 //exam 1
 void flagRomaniaPattern( ActionData& action_data );

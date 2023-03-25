@@ -73,7 +73,7 @@ ppm_menu.o: ppm_menu.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h Numb
 	g++ -c ppm_menu.cpp 
 
 
-image_filters.o: image_filters.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h
+image_filters.o: image_filters.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h 
 	g++ -c image_filters.cpp
 
 clean:

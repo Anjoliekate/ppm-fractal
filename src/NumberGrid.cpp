@@ -1,4 +1,5 @@
 #include "NumberGrid.h"
+#include "ColorTable.h"
 #include <vector>
 
 NumberGrid::NumberGrid( )
@@ -118,3 +119,34 @@ void NumberGrid::setPPM( PPM& ppm ) const{
 } //Configures the meta data of the PPM object so that the height and width match that 
 //of the number grid. Sets the maximum color value of the PPM to 63. Finally, for each pixel
 // in the PPM object, sets the color based on the table below.
+
+void NumberGrid::setPPM( PPM& ppm, const ColorTable& colors ) const{
+    int numColors = colors.getNumberOfColors();
+    //configure the grid only if more than 2 colors
+    if (numColors >= 2){
+    ppm.setHeight(gridHeight);
+    ppm.setWidth(gridWidth);
+    ppm.setMaxColorValue(colors.getMaxChannelValue());
+
+    //go through each pixel in the grid and set color based on grid number
+     for (int row = 0; row < gridHeight; row++){
+        for (int column = 0; column < gridWidth; column++){
+            int gridVal = getNumber(row, column);
+            if (gridVal == getMaxNumber()){
+            int red = colors[numColors - 1].getRed();
+            int green = colors[numColors - 1].getGreen();
+            int blue = colors[numColors - 1].getBlue();
+            ppm.setPixel(row, column, red, green, blue);
+            }
+            else{
+            int newVal = gridVal % numColors;
+            int red = colors[newVal].getRed();
+            int green = colors[newVal].getGreen();
+            int blue = colors[newVal].getBlue();
+            ppm.setPixel(row, column, red, green, blue);
+            }
+        }
+        }
+     }
+    }
+

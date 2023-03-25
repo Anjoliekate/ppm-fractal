@@ -1,7 +1,12 @@
 #include "ActionData.h"
 
 ActionData::ActionData(std::istream& is, std::ostream& os)
-:IS(is), OS(os), Quit(false), gridPointer(0){}; //The constructor initializes the input and output stream data members from the two parameters. The : initialization syntax must be used for this initialization. Also initializes the Boolean data member to false. The PPM data members do not need any initialization. Their default constructors will automatically initialize them.
+:IS(is), OS(os), Quit(false), gridPointer(0), colorTableObject(16){
+    Color color1 = Color(0, 255, 0);
+    Color color2 = Color(255, 0, 255);
+    colorTableObject.insertGradient(color1, color2, 0, 15);
+    //Needs to initialize the color table to have 16 color table slots. Also should fill the color table with a gradient from 0,255,0 to 255,0,255.
+}; //The constructor initializes the input and output stream data members from the two parameters. The : initialization syntax must be used for this initialization. Also initializes the Boolean data member to false. The PPM data members do not need any initialization. Their default constructors will automatically initialize them.
 
 std::istream& ActionData::getIS(){
     return IS;
@@ -48,3 +53,6 @@ void ActionData::setGrid(NumberGrid *grid) {
     gridPointer = grid;
 } //If the data member number grid pointer is not 0, delete it. Always assign the data 
 //member number grid pointer to the parameter grid. Note this is copying pointers, not copying the contents pointed to.
+ColorTable& ActionData::getTable(){
+    return colorTableObject;
+}; 
