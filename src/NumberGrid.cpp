@@ -1,5 +1,4 @@
 #include "NumberGrid.h"
-#include "ColorTable.h"
 #include <vector>
 
 NumberGrid::NumberGrid( )
@@ -150,3 +149,12 @@ void NumberGrid::setPPM( PPM& ppm, const ColorTable& colors ) const{
      }
     }
 
+ void NumberGrid::calculateAllNumbers(){
+    for(int row = 0; row< gridHeight; row++){
+        for (int column = 0; column < gridWidth; column++){
+            int numStore = calculateNumber(row, column);
+            setNumber(row, column, numStore);
+        }
+    }
+ } 
+//For every (row,column) pair, calls calculateNumber to get a number and setNumber to store it.

@@ -1,7 +1,6 @@
 #include "image_menu.h"
 #include "Image.h"
 #include "PPM.h"
-#include "ActionData.h"
 #include <iostream>
 
 int assignment1( std::istream& is, std::ostream& os){
@@ -86,14 +85,15 @@ void configureMenu( MenuData& menu_data ){
     menu_data.addAction( "set-random-color", setRandomColor, "Randomly set the RGB values for one slot in the color table.");
     menu_data.addAction( "set-color-gradient", setColorGradient, "Smoothly set the RGB values for a range of slots in the color table.");
     menu_data.addAction( "grid-apply-color-table", applyGridColorTable,	"Use the grid values to set colors in the output image using the color table.");
-
+    menu_data.addAction( "fractal-plane-size",	setFractalPlaneSize, "Set the dimensions of the grid in the complex plane.");
+    menu_data.addAction( "fractal-calculate", calculateFractal,	"Calculate the escape values for the fractal.");
 }
 //Calls addAction on the MenuData object to add the commands listed below in the Table of Commands, 
 //their functions, and their descriptions.
 
 int imageMenu(std::istream& is, std::ostream& os){
     ActionData action_data(is, os);
-    action_data.setGrid(new NumberGrid);
+    action_data.setGrid(new ComplexFractal);
     MenuData menu_data;
     configureMenu(menu_data);
     while(!action_data.getDone() && action_data.getIS().good()){

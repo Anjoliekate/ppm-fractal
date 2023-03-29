@@ -1,10 +1,8 @@
 #include <string>
 #include <iostream>
-#include "Image.h"
-#include "PPM.h"
 #include "ActionData.h"
 #include "MenuData.h"
-#include "ColorTable.h"
+#include "ComplexFractal.h"
 #ifndef _IMAGE_MENU_H_
 #define _IMAGE_MENU_H_
 
@@ -71,6 +69,10 @@ void setColor(ActionData& action_data);
 void setRandomColor(ActionData& action_data); 
 void setColorGradient(ActionData& action_data);
 void applyGridColorTable(ActionData& action_data);
+
+//ComplexFractal
+void setFractalPlaneSize(ActionData& action_data);
+void calculateFractal(ActionData& action_data);
 
 //exam 1
 void flagRomaniaPattern( ActionData& action_data );

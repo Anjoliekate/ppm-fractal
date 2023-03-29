@@ -1,8 +1,6 @@
 #include <iostream>
 #include "image_menu.h"
-#include "PPM.h"
-#include "ActionData.h"
-#include "ColorTable.h"
+#include "ComplexFractal.h"
 #include <cmath>
 
 void diagonalQuadPattern( ActionData& action_data  ){
@@ -199,7 +197,6 @@ void configureGrid(ActionData& action_data){
     int gridHeight = getInteger(action_data, "Grid Height? ");
     int gridWidth = getInteger(action_data, "Grid Width? ");
     int gridMaxValue = getInteger(action_data, "Grid Max Value? ");
-    NumberGrid gridPointer = action_data.getGrid();
     action_data.getGrid().setGridSize(gridHeight, gridWidth);
     action_data.getGrid().setMaxNumber(gridMaxValue);
 
@@ -266,6 +263,28 @@ void setColorGradient(ActionData& action_data){
 // Asks the user for “First position? “, “First red? “, “First green? “, “First blue? “,
 // “Second position? “, “Second red? “, “Second green? ” and “Second blue? “. The uses 
 //them to insertGradient() in the color table.
+
+void setFractalPlaneSize(ActionData& action_data){
+    double min_x = getDouble(action_data, "Min X? ");
+    double max_x = getDouble(action_data, "Max X? ");
+    double min_y = getDouble(action_data, "Min Y? ");
+    double max_y = getDouble(action_data, "Max Y? ");
+    //if (grid is complexFractal object){
+    ComplexFractal *fractal = dynamic_cast<ComplexFractal *>(&action_data.getGrid());
+    if (fractal == 0 ){
+        std::cout << "Not a ComplexFractal object. Can’t set plane size.";
+    }
+    else{
+    fractal ->setPlaneSize(min_x, max_x, min_y, max_y);
+    }
+//  else{ os << "Not a ComplexFractal object"}
+} //Asks the user for the doubles “Min X? “, “Max X? “, “Min Y? ” and “Max Y? “,
+// then sets the plane size. Only does this work if the grid is actually a ComplexFractal object.
+// Otherwise, gives a message “Not a ComplexFractal object. Can’t set plane size.”.
+
+void calculateFractal(ActionData& action_data){
+    action_data.getGrid().calculateAllNumbers();
+} //Calculates all numbers for the grid stored in action_data.
 
 void applyGridColorTable(ActionData& action_data){
     action_data.getGrid().setPPM(action_data.getOutputImage(), action_data.getTable());
