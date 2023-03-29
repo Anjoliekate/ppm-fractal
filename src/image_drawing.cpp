@@ -265,17 +265,19 @@ void setColorGradient(ActionData& action_data){
 //them to insertGradient() in the color table.
 
 void setFractalPlaneSize(ActionData& action_data){
-    double min_x = getDouble(action_data, "Min X? ");
-    double max_x = getDouble(action_data, "Max X? ");
-    double min_y = getDouble(action_data, "Min Y? ");
-    double max_y = getDouble(action_data, "Max Y? ");
+
     //if (grid is complexFractal object){
     ComplexFractal *fractal = dynamic_cast<ComplexFractal *>(&action_data.getGrid());
-    if (fractal == 0 ){
-        std::cout << "Not a ComplexFractal object. Can’t set plane size.";
+    if (fractal != 0 ){
+            double min_x = getDouble(action_data, "Min X? ");
+            double max_x = getDouble(action_data, "Max X? ");
+            double min_y = getDouble(action_data, "Min Y? ");
+            double max_y = getDouble(action_data, "Max Y? ");
+        (*fractal).setPlaneSize(min_x, max_x, min_y, max_y);
+        
     }
     else{
-    fractal ->setPlaneSize(min_x, max_x, min_y, max_y);
+    action_data.getOS() << "Not a ComplexFractal object. Can't set plane size.\n";
     }
 //  else{ os << "Not a ComplexFractal object"}
 } //Asks the user for the doubles “Min X? “, “Max X? “, “Min Y? ” and “Max Y? “,

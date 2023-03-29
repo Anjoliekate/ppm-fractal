@@ -27,7 +27,7 @@ class NumberGrid{
         virtual int calculateNumber(const int& row, const int& column) const = 0; 
         virtual void calculateAllNumbers();
 
-    private:
+    protected:
         int gridHeight;
         int gridWidth;
         int maxGridVal;
