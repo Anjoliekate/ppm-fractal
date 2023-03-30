@@ -3,6 +3,8 @@
 #include "ActionData.h"
 #include "MenuData.h"
 #include "ComplexFractal.h"
+#include "JuliaSet.h"
+
 #ifndef _IMAGE_MENU_H_
 #define _IMAGE_MENU_H_
 
@@ -73,6 +75,12 @@ void applyGridColorTable(ActionData& action_data);
 //ComplexFractal
 void setFractalPlaneSize(ActionData& action_data);
 void calculateFractal(ActionData& action_data);
+/*
+//Julia set
+void setJuliaParameters(ActionData& action_data);
+void setComplexFractal( ActionData& action_data );
+void setJuliaFractal( ActionData& action_data );
+*/
 
 //exam 1
 void flagRomaniaPattern( ActionData& action_data );

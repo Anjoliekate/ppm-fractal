@@ -8,7 +8,7 @@ ComplexFractal::ComplexFractal( )
 //What values of min_x and max_x would give you a rectangle of width 3 and centered on the origin? Be sure to use constructor chaining.
 
 ComplexFractal::ComplexFractal( const int& height, const int& width, const double& min_x, const double& max_x, const double& min_y, const double& max_y )
-   : NumberGrid(height, width), minX(min_x),  minY(min_y), maxX(max_x), maxY(max_y), deltaX(0.01), deltaY(0.01){
+   : NumberGrid(height, width), minX(min_x),  minY(min_y), maxX(max_x), maxY(max_y), deltaX(calculateDeltaX()), deltaY(calculateDeltaY()){
 } //Constructor. Sets up the NumberGrid and ComplexFractal data members from parameters. Be sure to use constructor chaining.
 
 ComplexFractal::~ComplexFractal( ){}
@@ -44,9 +44,7 @@ void ComplexFractal::setGridSize( const int& height, const int& width ){
 
     if ( height >= 2 && width >= 2){
         NumberGrid::setGridSize(height, width);
-        double dx = calculateDeltaX();
-        double dy = calculateDeltaY();
-        setDeltas(dx, dy);
+        setDeltas(calculateDeltaX(), calculateDeltaY());
     }
 }// This method overrides the NumberGrid version. Only makes changes if both height 
 //and width are at least 2. If so, it calls NumberGrid::setGridSize(). If a change is made,
@@ -70,9 +68,8 @@ void ComplexFractal::setPlaneSize( const double& min_x, const double& max_x, con
             minY = max_y;
             maxY = min_y;
         }
-        double dx = calculateDeltaX();
-        double dy = calculateDeltaY();
-        setDeltas(dx, dy);
+        
+        setDeltas(calculateDeltaX(), calculateDeltaY());
     }
 
 } //Sets the 4 plane coordinates. Only makes a change if all of the coordinate values are between -2.0 and 2.0,
