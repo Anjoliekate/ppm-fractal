@@ -294,3 +294,16 @@ void applyGridColorTable(ActionData& action_data){
 // Uses the new setPPM method of the grid to set the output image PPM
 // using color table. Note this is not a replacement for applyGrid, this is in
 // addition to that function.
+
+void setJuliaParameters(ActionData& action_data){
+    JuliaSet *js = dynamic_cast<JuliaSet *>(&action_data.getGrid());
+    if (js != 0 ){
+            double a = getDouble(action_data, "Parameter a? ");
+            double b = getDouble(action_data, "Parameter b? ");
+        (*js).setParameters(a, b);
+        
+    }
+    else{
+    action_data.getOS() << "Not a JuliaSet object. Can't set parameters.\n";
+    }
+}
