@@ -75,12 +75,12 @@ void applyGridColorTable(ActionData& action_data);
 //ComplexFractal
 void setFractalPlaneSize(ActionData& action_data);
 void calculateFractal(ActionData& action_data);
-/*
+
 //Julia set
 void setJuliaParameters(ActionData& action_data);
 void setComplexFractal( ActionData& action_data );
 void setJuliaFractal( ActionData& action_data );
-*/
+
 
 //exam 1
 void flagRomaniaPattern( ActionData& action_data );

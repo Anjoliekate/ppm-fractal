@@ -1,6 +1,7 @@
 #include <iostream>
 #include "image_menu.h"
 #include "ComplexFractal.h"
+#include "JuliaSet.h"
 #include <cmath>
 
 void diagonalQuadPattern( ActionData& action_data  ){

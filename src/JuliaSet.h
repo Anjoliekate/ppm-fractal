@@ -1,4 +1,4 @@
-/*
+
 #ifndef _JULIASET_H_
 #define _JULIASET_H_
 #include "ComplexFractal.h"
@@ -23,4 +23,3 @@ class JuliaSet: public ComplexFractal{
 };
 
 #endif
-*/
