@@ -92,7 +92,9 @@ void configureMenu( MenuData& menu_data ){
     menu_data.addAction("complex-fractal", setComplexFractal, "Choose to make a complex plane.");
     menu_data.addAction("julia", setJuliaFractal, "Choose to make a Julia set.");
     menu_data.addAction("mandelbrot", setMandelbrotFractal,	"Choose to make a Mandelbrot set.");
-
+    menu_data.addAction("manhattan", setManhattanNumbers, "Choose to make a Manhattan distance grid.");
+    menu_data.addAction("mandelbrot-power",	setMandelbrotPowerFractal,	"Choose to make a Mandelbrot set with the power function.");
+    menu_data.addAction("set-mandelbrot-power",	setMandelbrotPower,	"Choose a power for the Mandelbrot power function.");
 }
 //Calls addAction on the MenuData object to add the commands listed below in the Table of Commands, 
 //their functions, and their descriptions.
@@ -124,6 +126,13 @@ void setMandelbrotFractal( ActionData& action_data ){
     action_data.setGrid(new MandelbrotSet);
 }
 
+void setManhattanNumbers(ActionData& action_data){
+    action_data.setGrid(new ManhattanNumbers);
+}
+
+void setMandelbrotPowerFractal(ActionData& action_data){
+    action_data.setGrid(new MandelbrotPower);
+}
 
 int flag_romania( std::istream& is, std::ostream& os ){
     ActionData action_data(is, os);

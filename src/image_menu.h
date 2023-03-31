@@ -97,4 +97,9 @@ void orangeFilter(ActionData& action_data);
 void drawSquare(ActionData& action_data);
 void plusEqualsInt( ActionData& action_data );
 
+//exam 3
+void setManhattanNumbers(ActionData& action_data);
+void setMandelbrotPower(ActionData& action_data);
+void setMandelbrotPowerFractal(ActionData& action_data);
+
 #endif /*_IMAGE_MENU_H_*/

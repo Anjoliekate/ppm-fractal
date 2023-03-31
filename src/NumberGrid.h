@@ -26,6 +26,7 @@ class NumberGrid{
         void setPPM( PPM& ppm ) const; 
         virtual int calculateNumber(const int& row, const int& column) const = 0; 
         virtual void calculateAllNumbers();
+        
 
     protected:
         int gridHeight;
@@ -33,5 +34,17 @@ class NumberGrid{
         int maxGridVal;
         std::vector<int> gridNum;
     };
+
+class ManhattanNumbers: public NumberGrid {
+    public:
+        ManhattanNumbers();
+        ManhattanNumbers(const int& height, const int& width);
+        virtual ~ManhattanNumbers();
+        int calculateNumber(const int& row, const int& column) const; 
+
+    private:
+
+
+};
 
 #endif

@@ -308,3 +308,14 @@ void setJuliaParameters(ActionData& action_data){
     action_data.getOS() << "Not a JuliaSet object. Can't set parameters.\n";
     }
 }
+
+void setMandelbrotPower(ActionData& action_data){
+    MandelbrotPower *power = dynamic_cast<MandelbrotPower *>(&action_data.getGrid());
+    if (power !=0){
+        double p = getDouble(action_data, "Power? ");
+        (*power).setPower(p);
+    }
+    else{
+        action_data.getOS() << "Not a MandelbrotPower object. Can't set power.";
+    }
+} //Asks the user for a double precision floating point value “Power? “, and uses it to setPower on the mandelbrot power object, but only if the NumberGrid stored in the action data is actually a MandelbrotPower object. Otherwise sends a message to the action data output “Not a MandelbrotPower object. Can’t set power.”.

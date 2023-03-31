@@ -1,4 +1,5 @@
 #include "MandelbrotSet.h"
+#include <cmath>
 
 MandelbrotSet::MandelbrotSet( )
 :ComplexFractal(){} //The default constructor, chain constructs via the ComplexFractal default constructor.
@@ -39,3 +40,23 @@ int MandelbrotSet::calculateNumber( const int& row, const int& column ) const{
 
 } //Uses other methods to find the plane coordinate of the pixel at row, column
 // and to calculate the escape count. Returns the count. If row, column isn’t valid, then returns -1.
+
+MandelbrotPower::MandelbrotPower()
+: nextPoint(2.0) {}//The default constructor, does constructor chaining to the parent class. Sets the default power to 2.0.
+
+MandelbrotPower::~MandelbrotPower(){} //The required but empty destructor.
+
+double MandelbrotPower::getPower() const{
+    return nextPoint;
+} //Returns the power data member.
+
+void MandelbrotPower::setPower(const double& power){
+    nextPoint = power;
+} //Modifies the power data member.
+
+void MandelbrotPower::calculateNextPoint(const double x0, const double y0, const double& a, const double& b, double& x1, double &y1) const{
+    double r = sqrt( x0*x0 + y0*y0 );
+    double theta = atan2( y0, x0 );
+    x1 = std::pow(r , nextPoint) * cos( nextPoint * theta ) + a;
+    y1 = std::pow(r, nextPoint) * sin( nextPoint * theta ) + b;
+} //Apply the formulas listed above, with x' = x1 y' = y1, x = x0, y = y0, where a,b are the original point.

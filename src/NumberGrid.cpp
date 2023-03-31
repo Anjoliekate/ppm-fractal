@@ -1,5 +1,6 @@
 #include "NumberGrid.h"
 #include <vector>
+#include <cmath>
 
 NumberGrid::NumberGrid( )
 : gridHeight(300), gridWidth(400), maxGridVal(255), gridNum((gridHeight * gridWidth), 0) {}
@@ -158,3 +159,18 @@ void NumberGrid::setPPM( PPM& ppm, const ColorTable& colors ) const{
     }
  } 
 //For every (row,column) pair, calls calculateNumber to get a number and setNumber to store it.
+
+ManhattanNumbers::ManhattanNumbers()
+: NumberGrid(600, 800){} //The default constructor, does constructor chaining to the parent class, setting the height to 600 and the width to 800.
+
+ManhattanNumbers::ManhattanNumbers(const int& height, const int& width)
+: NumberGrid{height, width} {}//Does constructor chaining to the parent class, setting the height and width according to the parameters.
+
+ManhattanNumbers::~ManhattanNumbers(){}
+
+int ManhattanNumbers::calculateNumber(const int& row, const int& column) const{
+    int vertical = std::abs(gridHeight / 2 - row);
+    int horizontal = std::abs(gridWidth / 2 - column);
+    int ManhattanSum = vertical + horizontal;
+    return ManhattanSum;
+} //Returns the Manhattan distance from the center of the grid (height/2,width/2) to the location at (row,column). Uses integer arithmetic for all calculations.
