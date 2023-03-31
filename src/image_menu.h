@@ -4,6 +4,7 @@
 #include "MenuData.h"
 #include "ComplexFractal.h"
 #include "JuliaSet.h"
+#include "MandelbrotSet.h"
 
 #ifndef _IMAGE_MENU_H_
 #define _IMAGE_MENU_H_
@@ -81,6 +82,8 @@ void setJuliaParameters(ActionData& action_data);
 void setComplexFractal( ActionData& action_data );
 void setJuliaFractal( ActionData& action_data );
 
+//Mandelbrot Set
+void setMandelbrotFractal( ActionData& action_data );
 
 //exam 1
 void flagRomaniaPattern( ActionData& action_data );

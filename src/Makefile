@@ -8,8 +8,8 @@ hello.o: hello.cpp
 	g++ -c hello.cpp
 
 
-questions_3: questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
-	g++ -o questions_3 questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
+questions_3: questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
+	g++ -o questions_3 questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
 
 questions_3.o: questions_3.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h
 	g++ -c questions_3.cpp
@@ -17,12 +17,12 @@ questions_3.o: questions_3.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.
 user_io.o: user_io.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h
 	g++ -c user_io.cpp
 
-controllers.o: controllers.cpp user_io.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
+controllers.o: controllers.cpp user_io.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
 	g++ -c controllers.cpp
 
 
-ascii_image: ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
-	g++ -o ascii_image ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
+ascii_image: ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
+	g++ -o ascii_image ascii_image.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
 
 ascii_image.o: ascii_image.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h
 	g++ -c ascii_image.cpp
@@ -38,8 +38,8 @@ Image.o: Image.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid
 
 
 
-image_file: image_file.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
-	g++ -o image_file image_file.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
+image_file: image_file.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
+	g++ -o image_file image_file.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
 
 image_file.o: image_file.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h
 	g++ -c image_file.cpp 
@@ -66,8 +66,8 @@ MenuData.o: MenuData.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h Numb
 	g++ -c MenuData.cpp
 
 
-ppm_menu: ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
-	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o
+ppm_menu: ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
+	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o
 
 ppm_menu.o: ppm_menu.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h
 	g++ -c ppm_menu.cpp 
@@ -88,6 +88,9 @@ ComplexFractal.o: ComplexFractal.cpp image_menu.h Image.h PPM.h MenuData.h Actio
 
 JuliaSet.o: JuliaSet.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h
 	g++ -c JuliaSet.cpp
+
+MandelbrotSet.o: MandelbrotSet.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h
+	g++ -c MandelbrotSet.cpp
 
 clean:
 	-rm -f *.h.gch

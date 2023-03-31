@@ -1,6 +1,7 @@
 #include "image_menu.h"
 #include "Image.h"
 #include "PPM.h"
+#include "MandelbrotSet.h"
 #include <iostream>
 
 int assignment1( std::istream& is, std::ostream& os){
@@ -90,6 +91,7 @@ void configureMenu( MenuData& menu_data ){
     menu_data.addAction("julia-parameters",	setJuliaParameters,	"Set the parameters of the Julia Set function.");
     menu_data.addAction("complex-fractal", setComplexFractal, "Choose to make a complex plane.");
     menu_data.addAction("julia", setJuliaFractal, "Choose to make a Julia set.");
+    menu_data.addAction("mandelbrot", setMandelbrotFractal,	"Choose to make a Mandelbrot set.");
 
 }
 //Calls addAction on the MenuData object to add the commands listed below in the Table of Commands, 
@@ -117,6 +119,10 @@ void setComplexFractal( ActionData& action_data ){
 void setJuliaFractal( ActionData& action_data ){
     action_data.setGrid(new JuliaSet);
 } //Use setGrid() to set action_data’s grid to a JuliaSet object allocated from the heap.
+
+void setMandelbrotFractal( ActionData& action_data ){
+    action_data.setGrid(new MandelbrotSet);
+}
 
 
 int flag_romania( std::istream& is, std::ostream& os ){
