@@ -2,13 +2,13 @@
 #include <cmath>
 
 ComplexFractal::ComplexFractal( )
-: NumberGrid(201, 301), minX(-1.5), minY(-1.0), maxX(1.5), maxY(1.0), deltaX(0.01), deltaY(0.01) {} 
+: ThreadedGrid(201, 301), minX(-1.5), minY(-1.0), maxX(1.5), maxY(1.0), deltaX(0.01), deltaY(0.01) {} 
 //Default constructor. Sets up for a 301x201 grid. For the plane coordinates uses the 3x2 
 //rectangle centered on the origin. Sets the default value for delta_x and delta_y to 0.01. 
 //What values of min_x and max_x would give you a rectangle of width 3 and centered on the origin? Be sure to use constructor chaining.
 
 ComplexFractal::ComplexFractal( const int& height, const int& width, const double& min_x, const double& max_x, const double& min_y, const double& max_y )
-   : NumberGrid(height, width), minX(min_x),  minY(min_y), maxX(max_x), maxY(max_y), deltaX(calculateDeltaX()), deltaY(calculateDeltaY()){
+   : ThreadedGrid(height, width), minX(min_x),  minY(min_y), maxX(max_x), maxY(max_y), deltaX(calculateDeltaX()), deltaY(calculateDeltaY()){
 } //Constructor. Sets up the NumberGrid and ComplexFractal data members from parameters. Be sure to use constructor chaining.
 
 ComplexFractal::~ComplexFractal( ){}
@@ -43,7 +43,7 @@ double ComplexFractal::getDeltaY( ) const{
 void ComplexFractal::setGridSize( const int& height, const int& width ){
 
     if ( height >= 2 && width >= 2){
-        NumberGrid::setGridSize(height, width);
+        ThreadedGrid::setGridSize(height, width);
         setDeltas(calculateDeltaX(), calculateDeltaY());
     }
 }// This method overrides the NumberGrid version. Only makes changes if both height 

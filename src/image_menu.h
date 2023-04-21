@@ -4,6 +4,7 @@
 #include "MenuData.h"
 #include "ComplexFractal.h"
 #include "JuliaSet.h"
+#include "ThreadedGrid.h"
 #include "MandelbrotSet.h"
 
 #ifndef _IMAGE_MENU_H_
@@ -84,6 +85,9 @@ void setJuliaFractal( ActionData& action_data );
 
 //Mandelbrot Set
 void setMandelbrotFractal( ActionData& action_data );
+
+//threaded
+void calculateFractalSingleThread(ActionData& action_data); 
 
 //exam 1
 void flagRomaniaPattern( ActionData& action_data );

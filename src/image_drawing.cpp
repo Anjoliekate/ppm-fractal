@@ -319,3 +319,7 @@ void setMandelbrotPower(ActionData& action_data){
         action_data.getOS() << "Not a MandelbrotPower object. Can't set power.";
     }
 } //Asks the user for a double precision floating point value “Power? “, and uses it to setPower on the mandelbrot power object, but only if the NumberGrid stored in the action data is actually a MandelbrotPower object. Otherwise sends a message to the action data output “Not a MandelbrotPower object. Can’t set power.”.
+void calculateFractalSingleThread(ActionData& action_data){
+    action_data.getGrid().NumberGrid::calculateAllNumbers();
+}//This function calls the NumberGrid version of calculateAllNumbers instead of the ThreadedGrid version, which would 
+//be the default. This is accomplished with this syntax: grid.NumberGrid::calculateAllNumbers(), assuming grid is a reference to a polymorphic NumberGrid object.

@@ -94,7 +94,7 @@ void configureMenu( MenuData& menu_data ){
     menu_data.addAction("mandelbrot", setMandelbrotFractal,	"Choose to make a Mandelbrot set.");
     menu_data.addAction("manhattan", setManhattanNumbers, "Choose to make a Manhattan distance grid.");
     menu_data.addAction("mandelbrot-power",	setMandelbrotPowerFractal,	"Choose to make a Mandelbrot set with the power function.");
-    menu_data.addAction("set-mandelbrot-power",	setMandelbrotPower,	"Choose a power for the Mandelbrot power function.");
+    menu_data.addAction("set-mandelbrot-power",	setMandelbrotPower,	"Choose a power for the Mandelbrot power function.");    menu_data.addAction("fractal-calculate-single-thread",	calculateFractalSingleThread, 	"Calculate the escape values for the fractal, single-thread.");
 }
 //Calls addAction on the MenuData object to add the commands listed below in the Table of Commands, 
 //their functions, and their descriptions.

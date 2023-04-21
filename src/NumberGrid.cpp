@@ -164,7 +164,7 @@ ManhattanNumbers::ManhattanNumbers()
 : NumberGrid(600, 800){} //The default constructor, does constructor chaining to the parent class, setting the height to 600 and the width to 800.
 
 ManhattanNumbers::ManhattanNumbers(const int& height, const int& width)
-: NumberGrid{height, width} {}//Does constructor chaining to the parent class, setting the height and width according to the parameters.
+: NumberGrid(height, width){}
 
 ManhattanNumbers::~ManhattanNumbers(){}
 
