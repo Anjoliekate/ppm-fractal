@@ -1,6 +1,7 @@
 #include "glut_app.h"
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 
 //
 // GLUT callback functions
@@ -26,8 +27,23 @@ void keyboard_cb(unsigned char c, int x, int y) {
   case 27: // escape character means to quit the program
     exit(0);
     break;
-  case 'b':
-    // do something when 'b' character is hit.
+  case 'J':
+    g_app_data->createJulia();
+    break;
+  case 'j':
+    g_app_data->createJulia2();
+    break;
+  case 'M':
+    g_app_data->createMandelbrot();
+    break;
+  case 'm':
+    g_app_data->createMandelbrot2();
+    break;
+  case 'C':
+    g_app_data->createComplexFractal();
+    break;
+  case 'c':
+    g_app_data->createComplexFractal2();
     break;
   default:
     return; // if we don't care, return without glutPostRedisplay()
@@ -96,4 +112,3 @@ void mouse_cb(int mouse_button, int state, int x, int y) {
   }
   glutPostRedisplay();
 }
-

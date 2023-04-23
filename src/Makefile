@@ -11,7 +11,7 @@ hello.o: hello.cpp
 questions_3: questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o ThreadedGrid.o
 	g++ -o questions_3 questions_3.o user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o  ThreadedGrid.o -lpthread
 
-questions_3.o: questions_3.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h ThreadedGrid.h
+questions_3.o: questions_3.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h 
 	g++ -c questions_3.cpp
 
 user_io.o: user_io.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h ThreadedGrid.h
@@ -67,7 +67,7 @@ MenuData.o: MenuData.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h Numb
 
 
 ppm_menu: ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o ThreadedGrid.o
-	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o ThreadedGrid.o-lpthread
+	g++ -o ppm_menu ppm_menu.o user_io.o controllers.o image_drawing.o image_output.o Image.o PPM.o MenuData.o ActionData.o image_filters.o NumberGrid.o ColorTable.o ComplexFractal.o JuliaSet.o MandelbrotSet.o ThreadedGrid.o -lpthread
 
 ppm_menu.o: ppm_menu.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h ThreadedGrid.h
 	g++ -c ppm_menu.cpp 
@@ -93,7 +93,7 @@ MandelbrotSet.o: MandelbrotSet.cpp image_menu.h Image.h PPM.h MenuData.h ActionD
 	g++ -c MandelbrotSet.cpp
 
 ThreadedGrid.o: ThreadedGrid.cpp image_menu.h Image.h PPM.h MenuData.h ActionData.h NumberGrid.h ThreadedGrid.h
-	g++ -c ThreadedGrid.cpp
+	g++ -std=c++11 -c ThreadedGrid.cpp
 
 clean:
 	-rm -f *.h.gch
