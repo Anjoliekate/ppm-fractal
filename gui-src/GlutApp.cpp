@@ -3,7 +3,7 @@
 #include "image_menu.h"
 
 GlutApp::GlutApp(int height, int width)
-  : mHeight(height), mWidth(width), mActionData(mInputStream, mOutputStream), mMinX(-2.0), mMaxX(-2.0), mMinY(2.0), mMaxY(2.0), mInteractionMode(IM_FRACTAL), mFractalMode(M_MANDELBROT), mMaxNumber(200), mColor1(), mColor2(), mNumColor(32){
+  : mHeight(height), mWidth(width), mActionData(mInputStream, mOutputStream), mMinX(-2.0), mMaxX(2.0), mMinY(-2.0), mMaxY(2.0), mInteractionMode(IM_FRACTAL), mFractalMode(M_MANDELBROT), mMaxNumber(200), mNumColor(32){
   configureMenu(mMenuData);
   mActionData.setGrid(new ComplexFractal);
   juliaParameters(0.3, 1.8);
@@ -268,7 +268,7 @@ void GlutApp::zoomIn(){
    double dx = (1.0 - 0.9)*(mMaxX - mMinX) / 2.0;
    mMinX += dx;
    mMaxX -= dx;
-   double dy = (1.0 - 0.9)*(mMaxX - mMinX) / 2.0;
+   double dy = (1.0 - 0.9)*(mMaxY - mMinY) / 2.0;
    mMinY += dy;
    mMaxY -= dy;
 }
@@ -277,7 +277,7 @@ void GlutApp::zoomOut(){
     double dx = (1.0 - 0.9)*(mMaxX - mMinX) / 2.0;
     mMinX -= dx;
     mMaxX += dx;
-    double dy = (1.0 - 0.9)*(mMaxX - mMinX) / 2.0;
+    double dy = (1.0 - 0.9)*(mMaxY - mMinY) / 2.0;
     mMinY -= dy;
     mMaxY += dy;
 }
@@ -293,7 +293,7 @@ void GlutApp::moveLeft(){
 
 void GlutApp::moveRight(){
     double dx = (1.0 - 0.9)*(mMaxX-mMinX) / 2.0;
-    if (mMinX - dx >= -2.0){
+    if (mMaxX + dx >= -2.0){
         mMinX += dx;
         mMaxX += dx;
     }
@@ -301,9 +301,9 @@ void GlutApp::moveRight(){
 
 void GlutApp::moveUp(){
     double dy = (1.0 - 0.9)*(mMaxY - mMinY) / 2.0;
-    if (mMinY - dy >= -2.0){
-        mMinY -= dy;
-        mMaxY -= dy;
+    if (mMaxY + dy <= -2.0){
+        mMinY += dy;
+        mMaxY += dy;
     }
 
 }
@@ -311,8 +311,8 @@ void GlutApp::moveUp(){
 void GlutApp::moveDown(){
     double dy = (1.0 - 0.9)*(mMaxY - mMinY) / 2.0;
     if (mMinY - dy >= -2.0){
-        mMinY += dy;
-        mMaxY += dy;
+        mMinY -= dy;
+        mMaxY -= dy;
     }
 }
 
@@ -332,6 +332,7 @@ void GlutApp::decreaseMaxNumber(){
     }
 }
 void GlutApp::setAB(int x, int y){
+    mActionData.getGrid();
     ComplexFractal *cf = dynamic_cast<ComplexFractal *>(&mActionData.getGrid());
     if (mFractalMode == M_MANDELBROT && cf != 0){
         mA = mMinX + x * cf->getDeltaX();
