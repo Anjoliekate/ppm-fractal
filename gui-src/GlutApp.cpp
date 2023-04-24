@@ -7,6 +7,15 @@ GlutApp::GlutApp(int height, int width)
   configureMenu(mMenuData);
   mActionData.setGrid(new ComplexFractal);
   juliaParameters(0.3, 1.8);
+  mColor1.setRed(30);
+  mColor1.setGreen(120);
+  mColor1.setBlue(255);
+  mColor2.setRed(50);
+  mColor2.setGreen(70);
+  mColor2.setBlue(180);
+  mColor3.setRed(120);
+  mColor3.setGreen(220);
+  mColor3.setBlue(70);
   setColorTable();
   createFractal();
 
@@ -53,6 +62,15 @@ void GlutApp::display() {
   }
   
   }else if(mInteractionMode == IM_COLORTABLE){
+    displayColorTable();
+  }
+  else if (mInteractionMode == IM_COLOR1){
+    displayColorTable();
+  }
+  else if (mInteractionMode == IM_COLOR2){
+    displayColorTable();
+  }
+  else if (mInteractionMode == IM_COLOR3){
     displayColorTable();
   }
   glEnd( );
@@ -227,6 +245,18 @@ void GlutApp::setColorTable(){
   }
   takeAction("set-color-gradient", mMenuData, mActionData);
 
+  mOutputStream.clear();
+  mInputStream.clear();
+  mOutputStream.str("");
+  mInputStream.str("");
+  {
+    std::stringstream tmp;
+    tmp << 0 << " " << mColor2.getRed() << " " << mColor2.getGreen() << " " << mColor2.getBlue() << " " << mNumColor - 1 << " " << mColor3.getRed() << " " << mColor3.getGreen() << " "<< mColor3.getBlue();
+    mInputStream.str(tmp.str());
+  }
+  takeAction("set-color-gradient", mMenuData, mActionData);
+
+
 }
 void GlutApp::decreaseColorTableSize(){
     if (mNumColor > 10 ){
@@ -360,4 +390,60 @@ void GlutApp::createFractal(){
     fractalPlaneSize(mMinX, mMaxX, mMinY, mMaxY);
     fractalCalculate();
     gridApplyColorTable();
+}
+void GlutApp::increaseChannel(Color& color, int channel){
+    if (color.getChannel(channel) > 255){
+        color.setChannel(channel, 255);
+    }
+    else{
+    color.setChannel(channel, color.getChannel(channel) + 10);
+    }
+    setColorTable(); 
+    gridApplyColorTable();
+} //color is the color to change and channel is 0, 1, or 2 to signify red, green, or blue. Add 10 to the current value of the channel. If the result is greater than 255, set to 255. After changing color, call to update the color table and output image.
+void GlutApp::decreaseChannel(Color& color, int channel){
+    if (color.getChannel(channel) < 0 ){
+        color.setChannel(channel, 0);
+    }
+    else{
+    color.setChannel(channel, color.getChannel(channel) - 10);
+    }
+    setColorTable(); 
+    gridApplyColorTable();
+} //color is the color to change and channel is 0, 1, or 2 to signify red, green, or blue. Subtract 10 from the current value of the channel. If the result is less than 0, set to 0. After changing color, call setColorTable() and gridApplyColorTable() to update the color table and output image.
+Color& GlutApp::fetchColor(){
+    if (mInteractionMode == IM_COLOR1){
+        return mColor1;
+    }
+    else if (mInteractionMode == IM_COLOR2){
+        return mColor2;
+    }
+    else if(mInteractionMode == IM_COLOR3){
+        return mColor3;
+    }
+    else{
+    static Color ec( -1, -1, -1 );
+    static Color c( -1, -1, -1 );
+    c = ec;
+    return c;
+    }
+    }
+ //If the interaction mode is IM_COLOR1 return mColor1, if it is IM_COLOR2, return mColor2. Otherwise return a Color object that is in the static section of memory.
+void GlutApp::increaseRed(){
+    increaseChannel(fetchColor(), 0);
+} //Calls increaseChannel(fetchColor(), 0); That is, increase the red (0) channel of the color selected by the current interaction mode.
+void GlutApp::decreaseRed(){
+    decreaseChannel(fetchColor(), 0);
+} //Similar to increaseRed(), but decrease instead.
+void GlutApp::increaseGreen(){
+    increaseChannel(fetchColor(), 1);
+}
+void GlutApp::decreaseGreen(){
+    decreaseChannel(fetchColor(), 1);
+}
+void GlutApp::increaseBlue(){
+    increaseChannel(fetchColor(), 2);
+}
+void GlutApp::decreaseBlue(){
+    decreaseChannel(fetchColor(), 2);
 }
