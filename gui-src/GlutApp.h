@@ -5,7 +5,12 @@
 #include "MenuData.h"
 #include <sstream>
 
+    enum InteractionMode { IM_FRACTAL, IM_COLORTABLE };
+    enum FractalMode { M_MANDELBROT, M_JULIA, M_COMPLEX };
+
+
 class GlutApp {
+
 public:
   GlutApp(int height, int width);
   void setSize(int height, int width);
@@ -27,8 +32,25 @@ public:
   void fractalPlaneSize(double x_min, double x_max, double y_min, double y_max);
   void fractalCalculate(); 
   void gridApplyColorTable();
-
-
+  void displayColorTable();
+  void setInteractionMode(InteractionMode mode);
+  void decreaseColorTableSize(); 
+  void increaseColorTableSize();
+  void randomColor1();
+  void randomColor2();
+  void zoomIn();
+  void zoomOut();
+  void moveLeft();
+  void moveRight();
+  void moveDown(); 
+  void moveUp();
+  void setFractalMode(FractalMode mode);
+  void increaseMaxNumber();
+  void decreaseMaxNumber(); 
+  void setAB(int x, int y);
+  void resetPlane();
+  void createFractal(); 
+  void setColorTable();
 
 protected:
   int mHeight, mWidth;
@@ -36,6 +58,16 @@ protected:
   std::stringstream mOutputStream;
   ActionData mActionData;
   MenuData mMenuData;
+  double mMinX, mMaxX, mMinY, mMaxY;
+  double mA, mB;
+  InteractionMode mInteractionMode;
+  FractalMode mFractalMode;
+  int mMaxNumber; 
+  Color mColor1;
+  Color mColor2;
+  int mNumColor;
+
+
 };
 
 #endif /* _GLUTAPP_H_ */
