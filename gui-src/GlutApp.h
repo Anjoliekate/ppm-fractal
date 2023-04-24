@@ -5,7 +5,7 @@
 #include "MenuData.h"
 #include <sstream>
 
-    enum InteractionMode { IM_FRACTAL, IM_COLORTABLE };
+    enum InteractionMode { IM_FRACTAL, IM_COLORTABLE, IM_COLOR1, IM_COLOR2, IM_COLOR3 };
     enum FractalMode { M_MANDELBROT, M_JULIA, M_COMPLEX };
 
 
@@ -51,6 +51,16 @@ public:
   void resetPlane();
   void createFractal(); 
   void setColorTable();
+  void increaseChannel(Color& color, int channel);
+  void decreaseChannel(Color& color, int channel);
+  Color& fetchColor();
+  void increaseRed();
+  void decreaseRed();
+  void increaseGreen();
+  void decreaseGreen();
+  void increaseBlue();
+  void decreaseBlue(); 
+
 
 protected:
   int mHeight, mWidth;
@@ -65,7 +75,9 @@ protected:
   int mMaxNumber; 
   Color mColor1;
   Color mColor2;
+  Color mColor3;
   int mNumColor;
+  int mImageNumber;
 
 
 };
