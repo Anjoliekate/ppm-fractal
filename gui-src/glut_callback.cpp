@@ -56,14 +56,8 @@ void keyboard_cb(unsigned char c, int x, int y) {
     break;
 
   case 'R':
-    if (IM_FRACTAL){
-    g_app_data->randomColor2();
+  g_app_data->checkMode();
     break;
-    }
-    else if(IM_COLORTABLE){
-    g_app_data->resetPlane();
-    break;
-    }
   case '>':
   case '.':
   g_app_data->increaseColorTableSize();

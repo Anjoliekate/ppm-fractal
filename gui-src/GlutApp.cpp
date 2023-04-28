@@ -76,6 +76,8 @@ void GlutApp::display() {
   glEnd( );
 }
 
+
+
 void GlutApp::selectJulia(){
     mOutputStream.clear();
     mOutputStream.str("");
@@ -211,9 +213,9 @@ glBegin(GL_POINTS);
         for (int column = 0; column < mWidth; column++){
              int i = column * mNumColor  / mWidth;
              Color color = mActionData.getTable()[i];
-             int red = color.getRed() / 255.0;
-             int green = color.getGreen() / 255.0;
-             int blue = color.getBlue() / 255.0;
+             double red = color.getRed() / 255.0;
+             double green = color.getGreen() / 255.0;
+             double blue = color.getBlue() / 255.0;
              glColor3d(red,green,blue);
              glVertex2i(column, row);
         }
@@ -323,7 +325,7 @@ void GlutApp::moveLeft(){
 
 void GlutApp::moveRight(){
     double dx = (1.0 - 0.9)*(mMaxX-mMinX) / 2.0;
-    if (mMaxX + dx >= -2.0){
+    if (mMaxX + dx <= 2.0){
         mMinX += dx;
         mMaxX += dx;
     }
@@ -331,7 +333,7 @@ void GlutApp::moveRight(){
 
 void GlutApp::moveUp(){
     double dy = (1.0 - 0.9)*(mMaxY - mMinY) / 2.0;
-    if (mMaxY + dy <= -2.0){
+    if (mMaxY + dy <= 2.0){
         mMinY += dy;
         mMaxY += dy;
     }
@@ -446,4 +448,13 @@ void GlutApp::increaseBlue(){
 }
 void GlutApp::decreaseBlue(){
     decreaseChannel(fetchColor(), 2);
+}
+
+void GlutApp::checkMode(){
+    if (mInteractionMode == IM_FRACTAL){
+        randomColor2();
+    }
+    else {
+        resetPlane();
+    }
 }

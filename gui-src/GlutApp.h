@@ -60,6 +60,7 @@ public:
   void decreaseGreen();
   void increaseBlue();
   void decreaseBlue(); 
+  void checkMode();
 
 
 protected:

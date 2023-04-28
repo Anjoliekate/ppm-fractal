@@ -21,8 +21,8 @@ for (int row = 0; row < getHeight(); row++){
 for (unsigned int i = 0; i < cores; i++){
     threadedVector.push_back(std::thread(&ThreadedGrid::worker, this));
 }
-for (unsigned int i = 0; i < threadedVector.size(); i++ ){
-    threadedVector[i].join();
+for (unsigned int j = 0; j < threadedVector.size(); j++ ){
+    threadedVector[j].join();
 }
 }// Overrides the method of the parent class. Uses the worker method in several threads to do the work. 
 //Be sure to manage the task queue, and clean up the threads when they have finished. Use the thread library 
@@ -30,16 +30,19 @@ for (unsigned int i = 0; i < threadedVector.size(); i++ ){
 //when creating threads to protect against limited resources.
 
 void ThreadedGrid::worker(){
-
-    while(tasks.size() != 0){
-        mutexLock.lock();
-        int row = tasks.back();
+    while (tasks.size()!=0){
+    mutexLock.lock();
+    int row = -1;
+    if (tasks.size() != 0){
+        row = tasks.back();
         tasks.pop_back();
-        mutexLock.unlock();
+        
             for (int column = 0; column < getWidth(); column++){
                 int num = calculateNumber(row, column);
                 setNumber(row, column, num);
             }
             }
+    mutexLock.unlock();
     }
+}
 //As long as tasks are available in the task queue, get one, and complete it. Should use calculateNumber() and setNumber().
