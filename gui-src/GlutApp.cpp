@@ -1,6 +1,8 @@
 #include "GlutApp.h"
 #include "glut_app.h"
 #include "image_menu.h"
+#include <cstdlib>
+#include <string>
 
 GlutApp::GlutApp(int height, int width)
   : mHeight(height), mWidth(width), mActionData(mInputStream, mOutputStream), mMinX(-2.0), mMaxX(2.0), mMinY(-2.0), mMaxY(2.0), mInteractionMode(IM_FRACTAL), mFractalMode(M_MANDELBROT), mMaxNumber(200), mNumColor(32){
@@ -450,11 +452,14 @@ void GlutApp::decreaseBlue(){
     decreaseChannel(fetchColor(), 2);
 }
 
-void GlutApp::checkMode(){
-    if (mInteractionMode == IM_FRACTAL){
+void GlutApp::checkMode(char character){
+    if (mInteractionMode == IM_COLORTABLE && character == 'r'){
+        randomColor1();
+    }
+    else if(mInteractionMode == IM_COLORTABLE && character == 'R'){
         randomColor2();
     }
-    else {
+    else if(mInteractionMode == IM_FRACTAL && character == 'R') {
         resetPlane();
     }
 }
