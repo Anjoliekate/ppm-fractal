@@ -452,14 +452,15 @@ void GlutApp::decreaseBlue(){
     decreaseChannel(fetchColor(), 2);
 }
 
-void GlutApp::checkMode(char character){
-    if (mInteractionMode == IM_COLORTABLE && character == 'r'){
+void GlutApp::checkMode(int num){
+    if (num == 114 && mInteractionMode == IM_COLORTABLE){
         randomColor1();
     }
-    else if(mInteractionMode == IM_COLORTABLE && character == 'R'){
+    else if(mInteractionMode == IM_COLORTABLE && num == 82){
         randomColor2();
     }
-    else if(mInteractionMode == IM_FRACTAL && character == 'R') {
+    else if(mInteractionMode == IM_FRACTAL && num == 82) {
         resetPlane();
+        createFractal();
     }
 }
