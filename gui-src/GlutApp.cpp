@@ -9,12 +9,12 @@ GlutApp::GlutApp(int height, int width)
   configureMenu(mMenuData);
   mActionData.setGrid(new ComplexFractal);
   juliaParameters(0.3, 1.8);
-  mColor1.setRed(30);
-  mColor1.setGreen(120);
-  mColor1.setBlue(255);
-  mColor2.setRed(50);
-  mColor2.setGreen(70);
-  mColor2.setBlue(180);
+  mColor1.setRed(255);
+  mColor1.setGreen(160);
+  mColor1.setBlue(122);
+  mColor2.setRed(32);
+  mColor2.setGreen(178);
+  mColor2.setBlue(170);
   mColor3.setRed(120);
   mColor3.setGreen(220);
   mColor3.setBlue(70);
@@ -249,16 +249,18 @@ void GlutApp::setColorTable(){
   }
   takeAction("set-color-gradient", mMenuData, mActionData);
 
-  mOutputStream.clear();
-  mInputStream.clear();
-  mOutputStream.str("");
-  mInputStream.str("");
-  {
-    std::stringstream tmp;
-    tmp << 0 << " " << mColor2.getRed() << " " << mColor2.getGreen() << " " << mColor2.getBlue() << " " << mNumColor - 1 << " " << mColor3.getRed() << " " << mColor3.getGreen() << " "<< mColor3.getBlue();
-    mInputStream.str(tmp.str());
-  }
-  takeAction("set-color-gradient", mMenuData, mActionData);
+//   EXAM
+//
+//   mOutputStream.clear();
+//   mInputStream.clear();
+//   mOutputStream.str("");
+//   mInputStream.str("");
+//   {
+//     std::stringstream tmp;
+//     tmp << 0 << " " << mColor2.getRed() << " " << mColor2.getGreen() << " " << mColor2.getBlue() << " " << mNumColor - 1 << " " << mColor3.getRed() << " " << mColor3.getGreen() << " "<< mColor3.getBlue();
+//     mInputStream.str(tmp.str());
+//   }
+//   takeAction("set-color-gradient", mMenuData, mActionData);
 
 
 }
@@ -452,14 +454,16 @@ void GlutApp::decreaseBlue(){
     decreaseChannel(fetchColor(), 2);
 }
 
-void GlutApp::checkMode(int num){
-    if (num == 114 && mInteractionMode == IM_COLORTABLE){
+void GlutApp::checkMode(int key){
+    if (key == 114 && mInteractionMode == IM_COLORTABLE){
         randomColor1();
+        return;
     }
-    else if(mInteractionMode == IM_COLORTABLE && num == 82){
-        randomColor2();
-    }
-    else if(mInteractionMode == IM_FRACTAL && num == 82) {
+    if(key == 82) { 
+        if (mInteractionMode == IM_COLORTABLE) {
+            randomColor2();
+            return;
+        }
         resetPlane();
         createFractal();
     }

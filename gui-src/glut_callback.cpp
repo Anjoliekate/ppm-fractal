@@ -52,7 +52,7 @@ void keyboard_cb(unsigned char c, int x, int y) {
     g_app_data->setInteractionMode(IM_FRACTAL);
     break;
   case 'r':
-    g_app_data->checkMode(114);
+  g_app_data->checkMode(114);
     break;
   case 'R':
   g_app_data->checkMode(82);
