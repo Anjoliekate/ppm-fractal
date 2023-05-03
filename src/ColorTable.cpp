@@ -2,6 +2,10 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include <cmath>
+#include <list>
+#include <cstdlib>
+
 
 Color::Color( )
 : intRed(0), intGreen(0), intBlue(0){};
@@ -203,4 +207,197 @@ int ColorTable::getMaxChannelValue( ) const{
 
 } //Finds the largest value of any red, greeen, or blue value in any color in the table.
 
+void Color::setFromHSV(const double& hue, const double& saturation, const double& value){
+    double(intRed);
+    double(intGreen);
+    double(intBlue);
+    HSV_to_RGB(hue, saturation, value, intRed, intGreen, intBlue);
+} //Sets the color’s data members for RGB values by converting the inputs using the HSV_to_RGB() function.
+void Color::getHSV(double& hue, double& saturation, double& value) const{
+    RGB_to_HSV(double(intRed), double(intGreen), double(intBlue), hue, saturation, value);
+} //Sets the non-const reference parameters to the HSV values obtained by converting the color’s data member RGB values with the RGB_to_HSV() function.
 
+
+void HSV_to_RGB(const double& hue, const double& saturation, const double& value, double& red, double &green, double& blue) {
+  /* Convert Hue, Saturation, Value to Red, Green, Blue
+   * Implementation of algorithm from:
+   * https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_RGB
+   *
+   * Inputs and ranges:
+   * 0.0 <= hue <= 360.0
+   * 0.0 <= saturation <= 1.0
+   * 0.0 <= value <= 1.0
+   *
+   * Outputs and ranges:
+   * 0.0 <= red <= 255.0
+   * 0.0 <= green <= 255.0
+   * 0.0 <= blue <= 255.0
+   */
+  if(hue < 0.0 || hue > 360.0 || saturation < 0.0 || saturation > 1.0 || value < 0.0 || value > 1.0) {
+    red = green = blue = 0.0;
+    std::cerr << "HSV_to_RGB() input parameters out of range." << std::endl
+              << " hue: " << hue  << std::endl
+              << " saturation: " << saturation << std::endl
+              << " value: " << value << std::endl;
+    return;
+  }
+
+  // chroma selects the strength of the "primary" color of the current area of the wheel
+  double chroma = value * saturation;
+  // hue2 selects which 60-degree wedge of the color wheel we are in
+  double hue2 = hue / 60.0;
+  // x selects the strength of the "secondary" color of the current area of the wheel
+  double x = chroma * ( 1 - std::abs( std::fmod( hue2, 2 ) - 1 ) );
+  if( hue2 >= 0 && hue2 < 1 ) {
+    red = chroma;
+    green = x;
+    blue = 0.0;
+  } else if( hue2 >= 1 && hue2 < 2 ) {
+    red = x;
+    green = chroma;
+    blue = 0.0;
+  } else if( hue2 >= 2 && hue2 < 3 ) {
+    red = 0.0;
+    green = chroma;
+    blue = x;
+  } else if( hue2 >= 3 && hue2 < 4 ) {
+    red = 0.0;
+    green = x;
+    blue = chroma;
+  } else if( hue2 >= 4 && hue2 < 5 ) {
+    red = x;
+    green = 0.0;
+    blue = chroma;
+  } else if( hue2 >= 5 && hue2 <= 6 ) {
+    red = chroma;
+    green = 0.0;
+    blue = x;
+  } else {
+    red = 0;
+    green = 0;
+    blue = 0;
+  }
+
+  // m scales all color channels to obtain the overall brightness.
+  double m = value - chroma;
+  red = 255.0*( red + m );
+  green = 255.0*( green + m );
+  blue = 255.0*( blue + m );
+}
+
+void RGB_to_HSV(const double& red0, const double &green0, const double& blue0, double& hue, double& saturation, double& value) {
+  /* Red, Green, Blue to Convert Hue, Saturation, Value
+   * Implementation of algorithm from:
+   * https://en.wikipedia.org/wiki/HSL_and_HSV#From_RGB
+   *
+   * Inputs and ranges:
+   * 0.0 <= red <= 255.0
+   * 0.0 <= green <= 255.0
+   * 0.0 <= blue <= 255.0
+   *
+   * Outputs and ranges:
+   * 0.0 <= hue <= 360.0
+   * 0.0 <= saturation <= 1.0
+   * 0.0 <= value <= 1.0
+   */
+  if(red0 < 0.0 || red0 > 255.0 || green0 < 0.0 || green0 > 255.0 || blue0 < 0.0 || blue0 > 255.0) {
+    hue = saturation = value = 0.0;
+    std::cerr << "RGB_to_HSV() input parameters out of range." << std::endl
+              << " red: " << red0  << std::endl
+              << " green: " << green0 << std::endl
+              << " blue: " << blue0 << std::endl;
+    return;
+  }
+
+  double red   = red0 / 255.0;
+  double green = green0 / 255.0;
+  double blue  = blue0 / 255.0;
+
+  // x_max helps identify the primary hue
+  double x_max = red;
+  if(green > x_max) { x_max = green; }
+  if(blue > x_max) { x_max = blue; }
+  value = x_max;
+
+  double x_min = red;
+  if(green < x_min) { x_min = green; }
+  if(blue < x_min) { x_min = blue; }
+
+  double chroma = x_max - x_min;
+
+  if(chroma == 0) {
+    hue = 0;
+  } else if(value == red) {
+    hue = 60.0 * (0 + (green - blue)/chroma);
+  } else if(value == green) {
+    hue = 60.0 * (2 + (blue - red)/chroma);
+  } else if(value == blue) {
+    hue = 60.0 * (4 + (red - green)/chroma);
+  } else {
+    hue = -720.0;
+  }
+  if(hue < 0.0) {
+    hue += 360.0;
+  }
+
+  if(value == 0.0) {
+    saturation = 0.0;
+  } else {
+    saturation = chroma/value;
+  }
+
+}
+
+void ColorTable::insertHueSaturationValueGradient(const Color& color1, const Color& color2, const int& position1, const int& position2){
+    //make sure the positions are valid
+    std::vector<double>list1;
+    std::vector<double>list2;
+
+    if (position1 < position2 && position1 < getNumberOfColors() && position2 < getNumberOfColors() && position1 >= 0 && position2 >= 0){
+        double hue1;
+        double value1;
+        double saturation1;
+        double hue2;
+        double value2;
+        double saturation2;
+
+        int red1 = color1.getRed();
+        int blue1 = color1.getBlue();
+        int green1 = color1.getGreen();
+        int red2 = color2.getRed();
+        int green2 = color2.getGreen();
+        int blue2 = color2.getBlue();
+        RGB_to_HSV(red1, green1, blue1, hue1, saturation1, value1 );
+        RGB_to_HSV(red2, green2, blue2, hue2, saturation2, value2 );
+
+        color1.getHSV(hue1, saturation1, value1);
+        color2.getHSV(hue2, saturation2, value2);
+
+        double hueslope = gradientSlope(0, 360, position1, position2);
+        double saturationSlope = gradientSlope(0, 1, position1, position2);
+        double valueSlope = gradientSlope(0, 1, position1, position2);
+
+    //get the HSV values from both colors (previous exam task has these conversions)
+    //calculate the hue slope, the saturation slope, and the value slope
+
+    for (int i = position1; i <= position2; ++i){
+        for (int channel = 0; channel < 3; ++channel){
+            double hueVal1 = gradientValue(hue1, position1, hueslope, i);
+            double satVal1 = gradientValue(saturation1, position1, saturationSlope, i);
+            double valVal1 = gradientValue(value1, position1, valueSlope, i);
+            double hueVal2 = gradientValue(hue2, position1, hueslope, i);
+            double satVal2 = gradientValue(saturation2, position1, saturationSlope, i);
+            double valVal2 = gradientValue(value2, position1, valueSlope, i);
+            colorCollection[i].setFromHSV(hueVal1, satVal1, valVal1);
+            colorCollection[i].setFromHSV(hueVal2, satVal2, valVal2);
+        //not sure on this one I'm sure it is structured similar to the correct way
+        //I started to write your RGB to HSV without realizing which 
+        //didn't leave me with enough time to debug.
+        }
+    }
+}
+    //for each position in the gradient
+        //calculate the hue, the saturation, and the value.
+        //set a color using the HSV (previous exam task has these conversions)
+        //assign the color into the correct position in the color table.
+}
