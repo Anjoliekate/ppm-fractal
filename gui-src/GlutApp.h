@@ -61,6 +61,7 @@ public:
   void increaseBlue();
   void decreaseBlue(); 
   void checkMode(int key);
+  void toggleHSVColor();
 
 
 protected:
@@ -79,6 +80,7 @@ protected:
   Color mColor3;
   int mNumColor;
   int mImageNumber;
+  bool mHSVColor;
 
 
 };

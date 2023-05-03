@@ -5,7 +5,7 @@
 #include <string>
 
 GlutApp::GlutApp(int height, int width)
-  : mHeight(height), mWidth(width), mActionData(mInputStream, mOutputStream), mMinX(-2.0), mMaxX(2.0), mMinY(-2.0), mMaxY(2.0), mInteractionMode(IM_FRACTAL), mFractalMode(M_MANDELBROT), mMaxNumber(200), mNumColor(32){
+  : mHeight(height), mWidth(width), mActionData(mInputStream, mOutputStream), mMinX(-2.0), mMaxX(2.0), mMinY(-2.0), mMaxY(2.0), mInteractionMode(IM_FRACTAL), mFractalMode(M_MANDELBROT), mMaxNumber(200), mNumColor(32), mHSVColor(false){
   configureMenu(mMenuData);
   mActionData.setGrid(new ComplexFractal);
   juliaParameters(0.3, 1.8);
@@ -238,17 +238,38 @@ void GlutApp::setColorTable(){
   }
   takeAction("set-color-table-size", mMenuData, mActionData);
 
+
   mOutputStream.clear();
   mInputStream.clear();
   mOutputStream.str("");
   mInputStream.str("");
+  if (mHSVColor == true){
+  {
+    
+    std::stringstream tmp;
+    tmp << 0 << " " << mColor1.getRed() << " " << mColor1.getGreen() << " " << mColor1.getBlue() << " " << mNumColor - 1 << " " << mColor2.getRed() << " " << mColor2.getGreen() << " "<< mColor2.getBlue();
+    mInputStream.str(tmp.str());
+  
+  //0-360 0-1 0-1;use get red after hsv
+  takeAction("set-hsv-gradient", mMenuData, mActionData);
+  }}
+  else{
+    mOutputStream.clear();
+    mInputStream.clear();
+    mOutputStream.str("");
+    mInputStream.str("");
   {
     std::stringstream tmp;
     tmp << 0 << " " << mColor1.getRed() << " " << mColor1.getGreen() << " " << mColor1.getBlue() << " " << mNumColor - 1 << " " << mColor2.getRed() << " " << mColor2.getGreen() << " "<< mColor2.getBlue();
     mInputStream.str(tmp.str());
   }
-  takeAction("set-color-gradient", mMenuData, mActionData);
+    mColor1.getHSV(fetchColor() );
+    mColor2.getHSV(fetchColor() );
+    //not sure how to implemetn this
+    takeAction("set-color-gradient", mMenuData, mActionData);
 
+  
+  }
 //   EXAM
 //
 //   mOutputStream.clear();
@@ -468,3 +489,9 @@ void GlutApp::checkMode(int key){
         createFractal();
     }
 }
+void GlutApp::toggleHSVColor(){
+  mHSVColor = true;
+  setColorTable();
+  gridApplyColorTable();
+} 
+//Switch the value of mHSVColor. Then call setColorTable() and gridApplyColorTable().

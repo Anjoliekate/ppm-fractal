@@ -323,3 +323,22 @@ void calculateFractalSingleThread(ActionData& action_data){
     action_data.getGrid().NumberGrid::calculateAllNumbers();
 }//This function calls the NumberGrid version of calculateAllNumbers instead of the ThreadedGrid version, which would 
 //be the default. This is accomplished with this syntax: grid.NumberGrid::calculateAllNumbers(), assuming grid is a reference to a polymorphic NumberGrid object.
+
+void setHueSaturationValueGradient(ActionData& action_data){
+    int firstPosition = getInteger(action_data, "First position? ");
+    int firstHue = getInteger(action_data, "First hue? ");
+    int firstSat = getInteger(action_data, "First saturation? ");
+    int firstVal = getInteger(action_data, "First value? ");
+    int secondPosition = getInteger(action_data, "Second position? ");
+    int secondHue = getInteger(action_data, "Second hue? ");
+    int secondSat = getInteger(action_data, "Second saturation? ");
+    int secondVal = getInteger(action_data, "Second value? ");
+    Color firstColor;
+    firstColor.setFromHSV(firstHue, firstSat, firstVal);
+    Color secondColor;
+    secondColor.setFromHSV(firstHue, firstSat, firstVal);
+    action_data.getTable().insertGradient(firstColor, secondColor, firstPosition, secondPosition);
+}//Asks the user for the information needed to insert a gradient in HSV, creates a pair of colors that are set from the HSV values,
+// then inserts the HSV gradient into action_data’s color table. The prompts should be in this order: “First position? “, “First hue? “, 
+//“First saturation? “, “First value? “, “Second position? “, “Second hue? “, “Second saturation? “, “Second value? “. Note that positions are 
+//integers and HSV values are all floating point.

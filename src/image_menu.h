@@ -106,4 +106,7 @@ void setManhattanNumbers(ActionData& action_data);
 void setMandelbrotPower(ActionData& action_data);
 void setMandelbrotPowerFractal(ActionData& action_data);
 
+//final
+void setHueSaturationValueGradient(ActionData& action_data);
+
 #endif /*_IMAGE_MENU_H_*/

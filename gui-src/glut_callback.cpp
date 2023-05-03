@@ -122,6 +122,9 @@ void keyboard_cb(unsigned char c, int x, int y) {
   case '3':
     g_app_data->setInteractionMode(IM_COLOR3);
     break;
+  case 'h':
+    g_app_data->toggleHSVColor();
+    break;
   default:
     return; // if we don't care, return without glutPostRedisplay()
   }
